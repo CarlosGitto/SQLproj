@@ -1,2 +1,6 @@
-from . import models
-from .myengine import engine, Base
+import models
+from myengine import engine, Base
+
+
+Base.metadata.create_all(engine)
+
