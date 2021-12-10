@@ -13,3 +13,4 @@ mydb = mysql.connector.connect(
     )
 
 mycursor = mydb.cursor()
+

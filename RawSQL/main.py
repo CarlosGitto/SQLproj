@@ -5,3 +5,5 @@ expenseitems = cablevision
 expensefamily = internet
 assignedexpense = 2 unidades de cablevision
 """
+
+mycursor.execute("")
