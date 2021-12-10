@@ -1,6 +1,5 @@
 import models
-from .myengine import engine, Base
+from utils import engine, Base
 
 
 Base.metadata.create_all(engine)
-
