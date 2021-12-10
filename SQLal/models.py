@@ -39,8 +39,7 @@ class ExpenseItem(Base):
 
     id = Column(Integer, primary_key=True)
     item_name = Column(String(225), nullable=False, unique=True)
-    family_id = Column(Integer, ForeignKey(
-        "expense_family.id"), nullable=False)
+    family_id = Column(Integer, ForeignKey("expense_family.id"), nullable=False)
     cost = Column(Float, nullable=False)
 
 
