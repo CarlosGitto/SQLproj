@@ -5,9 +5,9 @@ from sqlalchemy.sql.schema import CheckConstraint, ForeignKey
 from myengine import Base
 
 
-class Sales(Base):
+class Sale(Base):
     """Stores sales with their given specifications."""
-    __tablename__ = "sales"
+    __tablename__ = "sale"
 
     id = Column(Integer, primary_key=True)
     product_id = Column(Integer, ForeignKey("product.id"))
@@ -32,24 +32,24 @@ class ExpenseFamily(Base):
     service_name = Column(String(225), nullable=False, unique=False)
 
 
-class ExpenseItems(Base):
+class ExpenseItem(Base):
     """Stores expense items that will later be referred to in assigned_expense_items."""
-    __tablename__ = "expense_items"
+    __tablename__ = "expense_item"
     __table_args__ = {CheckConstraint('cost <= 0.0')}
 
     id = Column(Integer, primary_key=True)
     item_name = Column(String(225), nullable=False, unique=True)
-    id_family = Column(Integer, ForeignKey(
+    family_id = Column(Integer, ForeignKey(
         "expense_family.id"), nullable=False)
     cost = Column(Float, nullable=False)
 
 
-class AssignedExpenseItems(Base):
+class AssignedExpenseItem(Base):
     """Stores a record of expense items, along a sales_id if expense was directly related to a sale."""
-    __tablename__ = "assigned_expense_items"
+    __tablename__ = "assigned_expense_item"
 
     id = Column(Integer, primary_key=True)
-    items_id = Column(Integer, ForeignKey("expense_items.id"))
+    item_id = Column(Integer, ForeignKey("expense_items.id"))
     state = Column(String(224))
     created_at = Column(DateTime, default=datetime.now())
-    sales_id = Column(Integer, ForeignKey('sales.id'), nullable=True)
+    sale_id = Column(Integer, ForeignKey('sales.id'), nullable=True)
