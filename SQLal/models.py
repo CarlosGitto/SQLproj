@@ -5,7 +5,6 @@ from sqlalchemy.sql.schema import CheckConstraint, ForeignKey
 from utils import Base
 
 
-
 class Product(Base):
     """Stores different products, along relevant attributes for further accountability."""
     __tablename__ = "product"
@@ -14,6 +13,7 @@ class Product(Base):
     price = Column(Integer, nullable=False, unique=False)
     cost = Column(Integer, nullable=False, unique=False)
     stock = Column(Integer, nullable=False, unique=False)
+
 
 class ExpenseFamily(Base):
     """Stores different categories applied to products to help taxonomize expenses."""
@@ -35,13 +35,13 @@ class Sale(Base):
 class ExpenseItem(Base):
     """Stores expense items that will later be referred to in assigned_expense_items."""
     __tablename__ = "expense_item"
-    __table_args__ =    (CheckConstraint('cost <= 0.0'),)   #no esta andando
+#     __table_args__ =    (CheckConstraint('cost <= 0.0'),)
 
     id = Column(Integer, primary_key=True)
     item_name = Column(String(225), nullable=False, unique=True)
-    family_id = Column(Integer, ForeignKey("expense_family.id"), nullable=False)
+    family_id = Column(Integer, ForeignKey(
+        "expense_family.id"), nullable=False)
     cost = Column(Float, nullable=False)
-
 
 
 class AssignedExpenseItem(Base):
@@ -53,5 +53,3 @@ class AssignedExpenseItem(Base):
     state = Column(String(224))
     created_at = Column(DateTime, default=datetime.now())
     sale_id = Column(Integer, ForeignKey('sale.id'), nullable=True)
-
-

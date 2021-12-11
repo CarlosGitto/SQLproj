@@ -1,28 +1,38 @@
 from utils import engine
 import models
+from values_to_seed.random_seed_generator import random_assigned_expense_item_engine, random_expense_family_engine, random_expense_item_engine, random_product_engine, random_sale_engine
 from sqlalchemy.orm import sessionmaker
-from values_to_seed.seed_dict_values import expense_family_values, expense_item_values, assigned_expense_values, product_values, sale_values
+# from values_to_seed.seed_dict_values import expense_family_values, expense_item_values, assigned_expense_values, product_values, sale_values
 
 
 Session = sessionmaker(engine)
 session = Session()
 
-"""This lists bring a table CLASS and some values from 'seed_dict_values.py' in the folder 'values_to_seed' """
+"""Seeds database with random values used for testing purposes."""
 
-expense_item_seed = [   {"class":models.ExpenseItem, "values":expense_item_values}  ]
+families = random_expense_family_engine(4)
+expense_items = random_expense_item_engine(50, families=families)
+products = random_product_engine(10)
+sales = random_sale_engine(1000, product=products)
+assigned_expenses = random_assigned_expense_item_engine(
+    200, items=expense_items, sales=sales)
+
+expense_item_seed = [
+    {"class": models.ExpenseItem, "values": expense_items}]
 
 
-expense_family_seed = [ {"class":models.ExpenseFamily, "values":expense_family_values}   ]
+expense_family_seed = [
+    {"class": models.ExpenseFamily, "values": families}]
 
 
-assigned_expense_seed = [   {"class":models.AssignedExpenseItem, "values": assigned_expense_values}    ]
+assigned_expense_seed = [
+    {"class": models.AssignedExpenseItem, "values": assigned_expenses}]
 
 
-product_seed = [    {"class":models.Product, "values":product_values}   ]
+product_seed = [{"class": models.Product, "values": products}]
 
 
-sale_seed = [   {"class":models.Sale, "values":sale_values} ]
-
+sale_seed = [{"class": models.Sale, "values": sales}]
 
 
 def seeder(dict_seed):
@@ -35,6 +45,7 @@ def seeder(dict_seed):
             row_to_add.append(new_row)
         session.add_all(row_to_add)
         session.commit()
+
 
 """A list with the right order to seed the tables"""
 list_of_seed = [
