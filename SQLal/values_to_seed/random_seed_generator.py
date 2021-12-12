@@ -59,7 +59,7 @@ def random_assigned_expense_item_engine(num_assigned_expenses: int, items: List,
         item_id = random.randint(1, num_items)
 
         created_at = datetime.datetime(
-            random.randint(1990, 2021),
+            random.randint(2010, 2021),
             random.randint(1, 12),
             random.randint(1, 28),
             random.randint(1, 23),
@@ -112,7 +112,7 @@ def random_sale_engine(num_sales: int, product: List) -> List[Dict]:
     for i in range(num_sales):
         product_id = random.randint(1, num_products)
         created_at = datetime.datetime(
-            random.randint(1990, 2021),
+            random.randint(2010, 2021),
             random.randint(1, 12),
             random.randint(1, 28),
             random.randint(1, 23),
