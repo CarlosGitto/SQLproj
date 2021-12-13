@@ -126,5 +126,4 @@ def random_sale_engine(num_sales: int, product: List) -> List[Dict]:
         }
 
         my_list.append(random_row)
-
     return my_list
