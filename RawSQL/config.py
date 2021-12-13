@@ -2,15 +2,21 @@ import mysql.connector
 
 host = "localhost"
 user = "root"
-passwd = "123456"
-database = "SQLproj"
+password = "123456"
+db_name = "SQLproj"
 
-mydb = mysql.connector.connect(
+def db_creator(database_name):
+    mydb = mysql.connector.connect(
         host = host,
         user = user,
-        passwd = passwd,
-        database = database
+        passwd = password
     )
+    mycursor = mydb.cursor()
+    mycursor.execute("CREATE DATABASE IF NOT EXISTS {}".format(database_name))
+    return database_name
 
-mycursor = mydb.cursor()
+
+db_name = db_creator(db_name)
+print(db_name)
+
 
