@@ -3,13 +3,12 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 
 user = 'root'
-password = '123456'
-host = 'localhost'
-port = '3306'
-db_name = 'SQLproj'
+password = 'root2021'
+port = 'localhost:3306'
+db_name = 'sql_challenge'
 
 engine = create_engine(
-        f'mysql+mysqlconnector://{user}:{password}@{host}:{port}/{db_name}'
+    f'mysql+mysqlconnector://{user}:{password}@{port}/{db_name}'
 )
 
 Base = declarative_base()
