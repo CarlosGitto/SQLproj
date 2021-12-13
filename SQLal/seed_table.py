@@ -10,7 +10,21 @@ session = Session()
 
 """Seeds database with random values used for testing purposes."""
 
-families = random_expense_family_engine(4)
+families = [
+    {
+        "service_name": "marketing"
+    },
+    {
+        "service_name": "finance"
+    },
+    {
+        "service_name": "hr"
+    },
+    {
+        "service_name": "others"
+    }
+]
+
 expense_items = random_expense_item_engine(50, families=families)
 products = random_product_engine(10)
 sales = random_sale_engine(1000, product=products)
