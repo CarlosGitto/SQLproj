@@ -1,3 +1,5 @@
+"""Creates or updates views in the database."""
+
 from connection import mycursor
 
 create_all_views_month = open(
@@ -20,3 +22,8 @@ def create_views() -> None:
     for line in create_all_views_year:
         line = line.strip("\n")
         mycursor.execute(line)
+
+
+if __name__ == "__main__":
+
+    create_views()

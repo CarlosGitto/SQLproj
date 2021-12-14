@@ -1,10 +1,17 @@
+"""Drops all tables if necessary."""
+
 from connection import mycursor
 
-drop_all_tables = open("RawSQL/create_drop_querys/drop_all.sql", "r").read().split(";")
+drop_table_queries = open(
+    "SQL_statements/create_and_drop_queries/drop_all.sql", "r").read().split(";")
 
-def drop_tables():
+
+def drop_tables() -> None:
     """Drop all tables"""
-    for line in drop_all_tables:
+    for line in drop_table_queries:
         mycursor.execute(line)
 
 
+if __name__ == "__main__":
+
+    drop_tables()
