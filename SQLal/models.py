@@ -35,7 +35,7 @@ class Sale(Base):
 class ExpenseItem(Base):
     """Stores expense items that will later be referred to in assigned_expense_items."""
     __tablename__ = "expense_item"
-#     __table_args__ =    (CheckConstraint('cost <= 0.0'),)
+#     __table_args__ = (CheckConstraint('cost <= 0.0'),)
 
     id = Column(Integer, primary_key=True)
     item_name = Column(String(225), nullable=False, unique=True)

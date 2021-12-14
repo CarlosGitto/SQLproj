@@ -1,0 +1,35 @@
+[
+    {
+        "model": "Product",
+        "attributes": [
+            "price",
+            "cost",
+            "stock"
+        ]
+    },
+    {
+        "model": "ExpenseFamily",
+        "attributes": [
+            "service_name"
+        ]
+    },
+    {
+        "model": "AssignedExpenseItem",
+        "attributes": [
+            "service_name"
+        ]
+    },
+    {
+        "model": "Sale",
+        "attributes": [
+            "created_at",
+            "product_id"
+        ]
+    },
+    {
+        "model": "ExpenseItem",
+        "attributes": [
+            "service_name"
+        ]
+    }
+]

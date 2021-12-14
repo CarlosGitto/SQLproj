@@ -1,14 +1,13 @@
-from RawSQL.selec_table import select_table
-from config import mycursor
-from RawSQL.make_tables import create_tables
-from RawSQL.drop_tables import drop_tables
-"""
-expenseitems = cablevision
-expensefamily = internet
-assignedexpense = 2 unidades de cablevision
-"""
+
+from make_views import create_views
+from drop_tables import drop_tables
+from make_tables import create_tables
+from table_seeder import seed_tables
+from selec_views import select_views_month, select_views_year
+
 drop_tables()
 create_tables()
-select_table()
-
-mycursor.execute("")
+create_views()
+seed_tables(10,1000,50,200)
+select_views_month()
+select_views_year()
