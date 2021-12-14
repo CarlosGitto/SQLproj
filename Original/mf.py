@@ -1,6 +1,6 @@
 
 
-import sys
+
 from sqlalchemy.orm import sessionmaker
 from myengine import engine,Base
 from tables import *
@@ -19,8 +19,8 @@ def new_pay(service,user,cost,email):
     session.commit()
 
 def delete_pay(service,id):
-    session.query(service).filter(
-        service.id == id
+    session.query(table_name).filter(
+        table_name.id == id
     ).delete()
     session.commit()
 
@@ -56,8 +56,7 @@ def select(tb_name):
     s = session.query(tb_name.id,tb_name.cost,tb_name.receipt,tb_name.created_at).all()
     return(s)
     
-def string_to_class(str):
-    return getattr(sys.modules[__name__], str)
+
 
 
     

@@ -42,7 +42,7 @@ SELECT year_income AS 'year',
     finance,
     other_expenses,
     total_expenses,
-    (sales - total_expenses) AS 'profits'
+    (gross_profit - total_expenses) AS 'profits'
     FROM income_by_year AS i
     JOIN expenses_by_year AS e 
     ON i.year_income = e.year_expense AND i.year_income = e.year_expense

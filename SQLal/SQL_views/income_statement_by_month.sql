@@ -1,4 +1,3 @@
-#
 CREATE OR REPLACE VIEW income_by_month AS
 SELECT year(created_at) AS 'year_income', 
     month(created_at) AS 'month_income', 
