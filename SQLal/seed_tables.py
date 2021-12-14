@@ -1,12 +1,10 @@
-from utils import engine
+from utils import session
 import models
 from values_to_seed.random_seed_generator import random_assigned_expense_item_engine, random_expense_family_engine, random_expense_item_engine, random_product_engine, random_sale_engine
-from sqlalchemy.orm import sessionmaker
-# from values_to_seed.seed_dict_values import expense_family_values, expense_item_values, assigned_expense_values, product_values, sale_values
 
 
-Session = sessionmaker(engine)
-session = Session()
+
+
 
 """Seeds database with random values used for testing purposes."""
 
@@ -70,6 +68,6 @@ list_of_seed = [
     assigned_expense_seed
 ]
 
-
-for seed in list_of_seed:
-    seeder(seed)
+if __name__ == "__main__":
+    for seed in list_of_seed:
+        seeder(seed)

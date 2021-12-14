@@ -8,3 +8,4 @@ def create_tables():
     for line in create_all_tables:
         mycursor.execute(line)
 
+create_tables()
