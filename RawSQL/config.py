@@ -1,3 +1,5 @@
+"""Creates database if theres not a database with the specified name."""
+
 import mysql.connector
 
 host = "localhost"

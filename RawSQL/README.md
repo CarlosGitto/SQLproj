@@ -13,9 +13,7 @@ password = YOUR_PASSWORD
 db_name = YOUR_DATABASE_NAME
 ```
 
-Once completed, fire up a CLI and run the _connection.py_ file.
-
-If this is the first time using this application, run _make_tables.py_ file to create all tables inside the database.
+If this is the first time using the application, run both _connection.py_ and _make_tables.py_ file to create database (if there is none with the database name provided) and tables inside such database.
 
 For testing purposes, run the file _table_seeder.py_ to fill tables with random data. This is useful for debugging SQL queries.
 

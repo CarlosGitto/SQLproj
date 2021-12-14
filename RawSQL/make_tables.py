@@ -1,11 +1,18 @@
+"""This file is used to create tables in the database."""
+
 from connection import mycursor
 
-create_all_tables = open("RawSQL/create_drop_querys/create_all.sql", "r").read().split(";")
+create_table_queries = open(
+    "SQL_statements/create_and_drop_queries/create_all.sql", "r").read().split(";")
 
 
-def create_tables():
+def create_tables() -> None:
     """Create all tables"""
-    for line in create_all_tables:
+
+    for line in create_table_queries:
         mycursor.execute(line)
 
-create_tables()
+
+if __name__ == "__main__":
+
+    create_tables()
