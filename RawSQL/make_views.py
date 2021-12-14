@@ -1,8 +1,12 @@
 from connection import mycursor
 
-create_all_views_month = open("RawSQL/select_and_views/income_statement_by_month.sql", "r").read().split(";")
-create_all_views_year = open("RawSQL/select_and_views/income_statement_by_year.sql", "r").read().split(";")
-def create_views():
+create_all_views_month = open(
+    "SQL_statements/views_creation/income_statement_by_month.sql", "r").read().split(";")
+create_all_views_year = open(
+    "SQL_statements/views_creation/income_statement_by_year.sql", "r").read().split(";")
+
+
+def create_views() -> None:
     """Create all views"""
     try:
         create_all_views_month.remove("")
