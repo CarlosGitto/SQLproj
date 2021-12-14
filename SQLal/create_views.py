@@ -27,4 +27,5 @@ def view_generator() -> None:
             print(f'{i} view created or updated successfully\n')
 
 
-view_generator()
+if __name__ == "__main__":
+    view_generator()

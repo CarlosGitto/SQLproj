@@ -1,5 +1,3 @@
-
-
 CREATE OR REPLACE VIEW income_by_month AS
 SELECT year(created_at) AS 'year_income', 
     month(created_at) AS 'month_income', 
@@ -10,8 +8,7 @@ SELECT year(created_at) AS 'year_income',
     JOIN product ON sale.product_id = product.id
     GROUP BY 1, 2
     ORDER BY 1, 2;
-
-
+#
 CREATE OR REPLACE VIEW expenses_by_month AS
 SELECT month(created_at) AS 'month_expense', year(created_at) AS 'year_expense', 
 	SUM(IF(service_name = 'marketing', cost, 0)) AS 'marketing',
@@ -31,8 +28,7 @@ SELECT month(created_at) AS 'month_expense', year(created_at) AS 'year_expense',
     ON e.family_id = f.id
     GROUP BY 1, 2
     ORDER BY 2, 1;
-
-
+#
 CREATE OR REPLACE VIEW income_statement_by_month AS
 SELECT year_income AS 'year', 
     month_income AS 'month', 

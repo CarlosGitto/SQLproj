@@ -18,7 +18,7 @@ python create_views.py
 ## Step 2
 ### Fill tables with random Data
 
-python seed_table.py
+python seed_tables.py
 
 ## Step 3
 ### Select the table or the view you want to see
@@ -58,9 +58,7 @@ pyhton select_view.py <arg1> <arg2>**
 
 ## Restart
 
+python drop_all_views.py
 python drop_all_tables.py
-python make_all_tables.py
-python create_views.py
-python seed_table.py
 
-# Go to Step 3
+### Go to Step 1
