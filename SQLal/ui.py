@@ -2,6 +2,7 @@ from utils import engine
 from tabulate import tabulate
 from sqlalchemy.orm import sessionmaker
 from models import Product, Sale, AssignedExpenseItem, ExpenseFamily, ExpenseItem
+from datetime import datetime
 
 session = sessionmaker(engine)()
 
@@ -88,61 +89,109 @@ def main() -> None:
         id = input('Select table to insert data into by id number: ')
 
         for i in models_list:
-            if id == i[0]:
-                model = i[1]
+            if id == '1':
+                price = int(input('Input price: '))
+                cost = int(input('Input cost: '))
+                stock = int(input('Input stock: '))
 
-                possible_commands = [
-                    {
-                        "model": "product",
-                        "attributes": [
-                            "price",
-                            "cost",
-                            "stock"
-                        ]
-                    },
-                    {
-                        "model": "expense_family",
-                        "attributes": [
-                            "service_name"
-                        ]
-                    },
-                    {
-                        "model": "assigned_expense_item",
-                        "attributes": [
-                            "service_name"
-                        ]
-                    },
-                    {
-                        "model": "sale",
-                        "attributes": [
-                            "created_at",
-                            "product_id"
-                        ]
-                    },
-                    {
-                        "model": "expense_item",
-                        "attributes": [
-                            "service_name"
-                        ]
-                    }
-                ]
+                engine.execute(
+                    f"INSERT INTO product (price, cost, stock) VALUES ({price},{cost},{stock});")
+                print('New row added successfully. \n')
 
-                for j in possible_commands:
-                    if j["model"] == model:
-                        attributes = {}
-                        for at in j['attributes']:
-                            attributes[f'{at}'] = input(
-                                f'Please type {at} to insert: ')
+                main()
 
-                row = model(attributes)
+            if id == '2':
 
-                session.add(row)
-                session.commit()
+                created_at = datetime(
+                    input('Input date in Y, M, D, H, M, S format: '))
+                product_id = input('Input product id: ')
+
+                engine.execute(
+                    f"INSERT INTO sale (created_at, product_id) VALUES ({created_at},{product_id});")
+                print('New row added successfully. \n')
+
+                main()
+
+            if id == '3':
+                created_at = datetime(
+                    input('Input date in Y, M, D, H, M, S format: '))
+                item_id = int(input('Input product id: '))
+                state = input(
+                    'Input state, either "pagado" or "no pagado": ')
+                sale_id = int(input('Input sale id if applies: '))
+
+                engine.execute(
+                    f" INSERT INTO assigned_expense_item (created_at, item_id, state, sale_id) VALUES ({created_at}, {item_id}, {state}, {sale_id});")
+                print('New row added successfully. \n')
+
+                main()
+
+            if id == '4':
+                service_name = input('Input new expense family: ')
+
+                engine.execute(
+                    f"INSERT INTO expense_family (service_name) VALUES ({service_name});")
+                print('New row added successfully. \n')
+
+                main()
+
+            if id == '5':
+
+                item_name = input('Input new item name: ')
+                family_id = input('Input family id: ')
+                cost = int(input('Input cost: '))
+
+                engine.execute(
+                    f"INSERT INTO expense_item (item_name, family_id, cost) VALUES ({item_name}, {family_id}, {cost})")
+                print('New row added successfully. \n')
+
+                main()
+
+            if id not in ['1', '2', '3', '4', '5']:
+                print('Command not recognized. \n')
 
                 main()
 
     if user_input_n1 == '3':
-        pass
+        models_list = [
+            ['1', 'product', Product],
+            ['2', 'sale', Sale],
+            ['3', 'assigned_expense_item', AssignedExpenseItem],
+            ['4', 'expense_family', ExpenseFamily],
+            ['5', 'expense_item', ExpenseItem]
+        ]
+
+        print('\n')
+        print(tabulate([[i[0], i[1]]
+              for i in models_list], headers=['id', 'table']))
+        print('\n')
+
+        id = input('Select table by id number: ')
+
+        for i in models_list:
+            if id == str(i[0]):
+
+                select = open(
+                    f'/Users/juanpena/Desktop/SQL_pr/SQLproj/SQLal/SQL_commands/queries/{i[1]}.sql').read()
+                r = engine.connect().execute(select)
+
+                query = []
+                keys = r.keys()
+                for row in r:
+                    query.append(list(row))
+
+                print('\n')
+                print(tabulate(query, headers=keys))
+
+                print('\n')
+                id_to_delete = input('Input id to delete: ')
+
+                engine.execute(
+                    f"DELETE FROM {i[1]} WHERE id = {id_to_delete};")
+
+                print('Row has been deleted successfully.\n')
+
+                main()
 
     if user_input_n1 not in ['1', '2', '3']:
         print('Command not recognized.\n')
