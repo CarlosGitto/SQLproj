@@ -1,4 +1,4 @@
-"""Seed the tables with random values"""
+"""This file seed the tables with random values"""
 
 from utils import session
 

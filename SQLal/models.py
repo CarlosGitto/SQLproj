@@ -2,6 +2,7 @@
 from sqlalchemy import Column, Integer, String, DateTime, Float
 from datetime import datetime
 
+
 from sqlalchemy.sql.schema import CheckConstraint, ForeignKey
 from utils import Base
 
@@ -32,7 +33,18 @@ class Sale(Base):
     product_id = Column(Integer, ForeignKey("product.id"))
     created_at = Column(DateTime, default=datetime.now())
     quantity = Column(Integer)
+    client_id = Column(Integer, ForeignKey("client.id"))
 
+
+class Client(Base):
+    """Stores user data from client"""
+    __tablename__ = "client"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(224), nullable=False, unique=False)
+    surname = Column(String(224), nullable=True, unique=False)
+    phone_number = Column(Integer, nullable=True, unique=True)
+    email = Column(String(224), nullable=False, unique=True)
 
 class ExpenseItem(Base):
     """Stores expense items that will later be referred to in assigned_expense_items."""
