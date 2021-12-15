@@ -25,3 +25,4 @@ def drop_views() -> None:
 if __name__ == "__main__":
 
     drop_tables()
+    drop_views()
