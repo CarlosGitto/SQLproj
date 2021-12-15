@@ -31,6 +31,7 @@ class Sale(Base):
     id = Column(Integer, primary_key=True)
     product_id = Column(Integer, ForeignKey("product.id"))
     created_at = Column(DateTime, default=datetime.now())
+    quantity = Column(Integer)
 
 
 class ExpenseItem(Base):
@@ -53,4 +54,3 @@ class AssignedExpenseItem(Base):
     item_id = Column(Integer, ForeignKey("expense_item.id"))
     state = Column(String(224))
     created_at = Column(DateTime, default=datetime.now())
-    sale_id = Column(Integer, ForeignKey('sale.id'), nullable=True)

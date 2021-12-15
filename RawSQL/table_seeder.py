@@ -3,7 +3,7 @@
 import datetime
 import random
 import string
-from connection import mycursor, mydb
+from config import my_cursor, my_conn
 
 
 def seed_tables(products_num: int, sales_num: int, expense_items_num: int, assigned_expense_items_num: int) -> None:
@@ -24,8 +24,8 @@ def seed_tables(products_num: int, sales_num: int, expense_items_num: int, assig
                 cost = random.randint(0, price)
                 stock = random.randint(1, 100)
                 values = (price, cost, stock)
-                mycursor.execute(sql_statement, values)
-                mydb.commit()
+                my_cursor.execute(sql_statement, values)
+                my_conn.commit()
 
         if "sale" in sql_statement and "sale_id" not in sql_statement:
             for i in range(sales_num):
@@ -40,14 +40,14 @@ def seed_tables(products_num: int, sales_num: int, expense_items_num: int, assig
                     random.randint(1, 59)
                 )
                 values = (product_id, created_at)
-                mycursor.execute(sql_statement, values)
-                mydb.commit()
+                my_cursor.execute(sql_statement, values)
+                my_conn.commit()
 
         if "expense_family" in sql_statement:
             for i in range(4):
                 values = [("hr",), ("others",), ("fianance",), ("marketing",)]
-                mycursor.execute(sql_statement, values[i])
-                mydb.commit()
+                my_cursor.execute(sql_statement, values[i])
+                my_conn.commit()
 
         if "expense_item" in sql_statement and "assigned" not in sql_statement:
             for i in range(expense_items_num):
@@ -55,8 +55,8 @@ def seed_tables(products_num: int, sales_num: int, expense_items_num: int, assig
                 item_family = random.randint(1, 4)
                 item_cost = random.uniform(0.0, 20000.0)
                 values = (item_name, item_family, item_cost)
-                mycursor.execute(sql_statement, values)
-                mydb.commit()
+                my_cursor.execute(sql_statement, values)
+                my_conn.commit()
 
         if "assigned_expense_item" in sql_statement:
             def get_random_saleid(min_val: int, max_val: int, none_probability: float):
@@ -77,8 +77,8 @@ def seed_tables(products_num: int, sales_num: int, expense_items_num: int, assig
                 )
                 sale_id = get_random_saleid(1, sales_num, 0.8)
                 values = (item_id, state, created_at, sale_id)
-                mycursor.execute(sql_statement, values)
-                mydb.commit()
+                my_cursor.execute(sql_statement, values)
+                my_conn.commit()
 
 
 if __name__ == "__main__":

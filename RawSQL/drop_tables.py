@@ -1,6 +1,6 @@
 """Drops all tables if necessary."""
 
-from connection import mycursor
+from config import my_cursor
 
 drop_table_statements = open(
     "SQL_statements/create_and_drop_queries/drop_all.sql", "r").read().split(";")
@@ -12,14 +12,14 @@ drop_views_statements = open(
 def drop_tables() -> None:
     """Drop all tables"""
     for line in drop_table_statements:
-        mycursor.execute(line)
+        my_cursor.execute(line)
 
 
 def drop_views() -> None:
     """Drop all views"""
 
     for line in drop_views_statements:
-        mycursor.execute(line)
+        my_cursor.execute(line)
 
 
 if __name__ == "__main__":

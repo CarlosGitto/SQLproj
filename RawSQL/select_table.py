@@ -1,7 +1,7 @@
 """Select queries by table."""
 
 import sys
-from connection import mycursor
+from config import my_cursor
 
 flag = sys.argv[1]
 
@@ -21,9 +21,9 @@ if __name__ == "__main__":
             statement = open(
                 f'SQL_statements/select_queries/{i[1]}.sql', 'r').read()
 
-            mycursor.execute(statement)
+            my_cursor.execute(statement)
 
-            query = mycursor.fetchall()
+            query = my_cursor.fetchall()
 
             for row in query:
                 print(row)
