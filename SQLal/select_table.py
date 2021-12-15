@@ -1,3 +1,4 @@
+"""This file select table/s to show"""
 from utils import session
 from models import Product, Sale, ExpenseFamily, ExpenseItem
 from models import AssignedExpenseItem as assei

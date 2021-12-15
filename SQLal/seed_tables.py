@@ -1,5 +1,9 @@
+"""Seed the tables with random values"""
+
 from utils import session
+
 import models
+
 from values_to_seed.random_seed_generator import random_assigned_expense_item_engine, random_expense_family_engine, random_expense_item_engine, random_product_engine, random_sale_engine
 
 

@@ -1,3 +1,4 @@
+"""This table delete al views from the database"""
 from select_view import list_of_views
 from utils import engine
 

@@ -1,3 +1,4 @@
+"""This file create views in the database using statements in '.sql' files"""
 from utils import engine
 
 
