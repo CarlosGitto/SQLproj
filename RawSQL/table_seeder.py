@@ -30,6 +30,7 @@ def seed_tables(products_num: int, sales_num: int, expense_items_num: int, assig
         if "sale" in sql_statement and "sale_id" not in sql_statement:
             for i in range(sales_num):
                 product_id = random.randint(1, products_num)
+
                 created_at = datetime.datetime(
                     random.randint(2010, 2021),
                     random.randint(1, 12),
@@ -52,7 +53,7 @@ def seed_tables(products_num: int, sales_num: int, expense_items_num: int, assig
             for i in range(expense_items_num):
                 item_name = ''.join(random.choices(string.ascii_letters, k=10))
                 item_family = random.randint(1, 4)
-                item_cost = random.randint(1, 20000)
+                item_cost = random.uniform(0.0, 20000.0)
                 values = (item_name, item_family, item_cost)
                 mycursor.execute(sql_statement, values)
                 mydb.commit()

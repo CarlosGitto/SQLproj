@@ -4,7 +4,7 @@ import mysql.connector
 
 host = "localhost"
 user = "root"
-password = "root2021"
+password = "123456"
 db_name = "sql_challenge"
 
 
@@ -22,4 +22,4 @@ def db_creator(database_name: str) -> str:
 
 
 db_name = db_creator(db_name)
-print(db_name)
+

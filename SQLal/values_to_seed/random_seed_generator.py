@@ -1,3 +1,4 @@
+"""Generate random values to be used for the 'seed_tables.py' file"""
 import random
 import string
 import datetime
@@ -27,7 +28,7 @@ def random_expense_item_engine(num_expenses: int, families: List) -> List[Dict]:
     for i in range(num_expenses):
         item_name = ''.join(random.choices(string.ascii_letters, k=10))
         item_family = random.randint(1, num_families)
-        item_cost = random.randint(1, 20000)
+        item_cost = random.uniform(0.0, 20000.0)
 
         random_row = {
             "item_name": item_name,

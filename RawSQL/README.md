@@ -13,7 +13,10 @@ password = YOUR_PASSWORD
 db_name = YOUR_DATABASE_NAME
 ```
 
+
 If this is the first time using the application, the following command creates the database with the specified name (if it doesn't exist) and tables inside it. Open the CLI of your choice and run:
+
+
 
 ```
 python make_tables.py

@@ -1,3 +1,5 @@
+"""This file set the connection with the database """
+
 from sqlalchemy.ext.declarative import declarative_base
 
 from sqlalchemy import create_engine
@@ -5,6 +7,8 @@ from sqlalchemy import create_engine
 import mysql.connector
 
 from sqlalchemy.orm import sessionmaker
+
+
 
 user = 'root'
 password = "123456"
