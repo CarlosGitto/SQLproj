@@ -1,9 +1,0 @@
-autopep8==1.6.0
-greenlet==1.1.2
-mysql==0.0.3
-mysql-connector-python==8.0.27
-mysqlclient==2.1.0
-protobuf==3.19.1
-pycodestyle==2.8.0
-SQLAlchemy==1.4.28
-toml==0.10.2

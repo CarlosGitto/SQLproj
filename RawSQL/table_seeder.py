@@ -1,3 +1,5 @@
+"""Seeds table with random data for testing purposes."""
+
 import datetime
 import random
 import string
