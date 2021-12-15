@@ -13,7 +13,7 @@ password = YOUR_PASSWORD
 db_name = YOUR_DATABASE_NAME
 ```
 
-If this is the first time using the application, run both _connection.py_ and _make_tables.py_ file to create database (if there is none with the database name provided) and tables inside such database.
+If this is the first time using the application, run both _make_tables.py_ and _make_views.py_ file to create database (if there is none with the database name provided), tables and views inside such database.
 
 For testing purposes, run the file _table_seeder.py_ to fill tables with random data. This is useful for debugging SQL queries.
 
