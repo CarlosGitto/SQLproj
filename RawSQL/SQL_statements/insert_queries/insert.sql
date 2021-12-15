@@ -1,24 +1,30 @@
+#
 INSERT INTO product
     (price, cost, stock)
 VALUES
-    (%s, %s, %s);
-
+    vals;
+#
 INSERT INTO expense_family
     (service_name)
 VALUES
-    (%s);
-
+    vals;
+#
 INSERT INTO sale
-    (product_id, created_at)
+    (product_id, created_at, quantity, client_id)
 VALUES
-    (%s, %s);
-
+    vals;
+#
 INSERT INTO expense_item
     (item_name, family_id, cost)
 VALUES
-    (%s, %s, %s);
-
+    vals;
+#
 INSERT INTO assigned_expense_item
-    (item_id, state, created_at, sale_id)
+    (item_id, state, created_at)
 VALUES
-    (%s, %s, %s, %s);
+    vals;
+#
+INSERT INTO client
+    (name, surname, phone_number, email)
+VALUES
+    vals;

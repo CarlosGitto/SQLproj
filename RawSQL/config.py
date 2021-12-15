@@ -2,8 +2,6 @@
 
 import mysql.connector
 
-from SQLproj.RawSQL import connection
-
 host = "localhost"
 user = "root"
 password = "root2021"
@@ -14,28 +12,24 @@ def connection_factory(server_host: str, server_user: str, server_password: str,
     """Establishes connection with MySQL server."""
 
     connection = mysql.connector.connect(
-        server_host,
-        server_user,
-        server_password,
-        server_database_name
+        host=server_host,
+        user=server_user,
+        password=server_password,
+        database=server_database_name
     )
 
     return connection
 
 
-def db_creator(database_name: str) -> None:
+def db_creator(database_name: str, engine: object) -> None:
     """Creates database in server using credentials."""
-
-    engine = connection_factory(host, user, password, db_name)
 
     engine.execute(f"CREATE DATABASE IF NOT EXISTS {database_name}")
 
-    print('Database now exists in server.')
-
-
-db_name = db_creator(db_name)
 
 my_conn = connection_factory(server_host=host, server_user=user,
                              server_password=password, server_database_name=db_name)
 
 my_cursor = my_conn.cursor()
+
+db_name = db_creator(database_name=db_name, engine=my_cursor)
