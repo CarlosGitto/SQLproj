@@ -13,7 +13,7 @@ db_name = "sql_challenge"
 def connection_factory(server_host: str, server_user: str, server_password: str, server_database_name: str) -> object:
     """Establishes connection with MySQL server."""
 
-    my_database = mysql.connector.connect(
+    connection = mysql.connector.connect(
         server_host,
         server_user,
         server_password,
