@@ -30,7 +30,7 @@ CREATE TABLE purchase (
     product_id INT,
     FOREIGN KEY (product_id) REFERENCES product (id),
     quantity INT,
-    price INT,
+    cost INT,
     in_stock INT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );

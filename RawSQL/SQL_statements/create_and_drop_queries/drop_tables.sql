@@ -8,7 +8,7 @@ DROP table purchase;
 
 DROP table product;
 
-DROP table client_table;
+DROP table customer_table;
 
 DROP table expense_item;
 

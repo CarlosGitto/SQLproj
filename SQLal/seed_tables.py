@@ -4,7 +4,7 @@ from utils import session
 
 import models
 
-from values_to_seed.random_seed_generator import random_assigned_expense_item_engine, random_expense_family_engine, random_expense_item_engine, random_product_engine, random_sale_engine
+from values_to_seed.random_seed_generator import random_client_table_engine, random_purchase_engine, random_assigned_expense_item_engine, random_expense_family_engine, random_expense_item_engine, random_product_engine, random_sale_engine
 
 
 
@@ -29,9 +29,13 @@ families = [
 
 expense_items = random_expense_item_engine(50, families=families)
 products = random_product_engine(10)
-sales = random_sale_engine(1000, product=products)
+purchases = random_purchase_engine(10, product=products)
+customers = random_client_table_engine(300)
+sales = random_sale_engine(1000, purchase=purchases, customer=customers)
 assigned_expenses = random_assigned_expense_item_engine(
-    200, items=expense_items, sales=sales)
+    200, items=expense_items)
+
+
 
 expense_item_seed = [
     {"class": models.ExpenseItem, "values": expense_items}]
@@ -51,6 +55,12 @@ product_seed = [{"class": models.Product, "values": products}]
 sale_seed = [{"class": models.Sale, "values": sales}]
 
 
+purchase_seed = [{"class": models.Purchase, "values": purchases}]
+
+
+customer_seed = [{"class": models.Customer, "values": customers}]
+
+
 def seeder(dict_seed):
     """Using for loop to seed each table in the database"""
     for item in dict_seed:
@@ -66,6 +76,8 @@ def seeder(dict_seed):
 """A list with the right order to seed the tables"""
 list_of_seed = [
     product_seed,
+    customer_seed,
+    purchase_seed,
     sale_seed,
     expense_family_seed,
     expense_item_seed,
