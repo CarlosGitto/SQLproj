@@ -7,7 +7,7 @@ import string
 from config import my_cursor, my_conn
 
 
-def seed_tables(products_num: int, sales_num: int, expense_items_num: int, assigned_expense_items_num: int, client_num: int, purchase_num: int) -> None:
+def seed_tables(products_num: int, sales_num: int, expense_items_num: int, assigned_expense_items_num: int, customer_num: int, purchase_num: int) -> None:
     """Creates and uploads randomly created rows for testing purposes."""
 
     """ Read a file of SQL statements and split them by ';' """
@@ -28,9 +28,9 @@ def seed_tables(products_num: int, sales_num: int, expense_items_num: int, assig
                 my_cursor.execute(statement)
                 my_conn.commit()
 
-        if 'client_table' in sql_statement and 'client_table_id' not in sql_statement:
+        if 'customer_table' in sql_statement and 'customer_table_id' not in sql_statement:
             
-            for i in range(client_num):
+            for i in range(customer_num):
                 name = ''.join(random.choices(string.ascii_letters, k=10))
                 surname = ''.join(random.choices(string.ascii_letters, k=10))
                 phone_number = int(''.join(
@@ -81,10 +81,10 @@ def seed_tables(products_num: int, sales_num: int, expense_items_num: int, assig
                     random.randint(1, 59)
                 )
 
-                client_table_id = random.randint(1, client_num)
+                customer_table_id = random.randint(1, customer_num)
                 quantity = random.randint(1, 5)
 
-                values = f'({purchase_id}, "{created_at}", {quantity}, {client_table_id})'
+                values = f'({purchase_id}, "{created_at}", {quantity}, {customer_table_id})'
 
                 statement = sql_statement.replace('vals', values)
                 my_cursor.execute(statement)
@@ -130,6 +130,6 @@ def seed_tables(products_num: int, sales_num: int, expense_items_num: int, assig
 if __name__ == "__main__":
 
    seed_tables(products_num=10, sales_num=200,
-               expense_items_num=20, assigned_expense_items_num=200, client_num=20, purchase_num=12)
+               expense_items_num=20, assigned_expense_items_num=200, customer_num=20, purchase_num=12)
 
  

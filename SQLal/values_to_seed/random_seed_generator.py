@@ -130,12 +130,12 @@ def random_product_engine(num_products: int) -> List[Dict]:
     return my_list
 
 
-def random_sale_engine(num_sales: int, purchase: List, client: List) -> List[Dict]:
+def random_sale_engine(num_sales: int, purchase: List, customer: List) -> List[Dict]:
     """Creates list of json objects to seed sale table for testing purposes."""
 
     my_list = []
     num_purchase = len(purchase)
-    num_client = len(client)
+    num_customer = len(customer)
 
     for i in range(num_sales):
         purchase_id = random.randint(1, num_purchase)
@@ -148,23 +148,23 @@ def random_sale_engine(num_sales: int, purchase: List, client: List) -> List[Dic
             random.randint(1, 59)
         )
         quantity = random.randint(1,1000)
-        client_table_id = random.randint(1, num_client)
+        customer_table_id = random.randint(1, num_customer)
 
         random_row = {
             "purchase_id": purchase_id,
             "created_at": created_at,
             "quantity": quantity,
-            "client_table_id": client_table_id
+            "customer_table_id": customer_table_id
         }
 
         my_list.append(random_row)
     return my_list
 
-def random_client_table_engine(num_clients: int) -> List[Dict]:
+def random_customer_table_engine(num_customer: int) -> List[Dict]:
 
     my_list = []
 
-    for i in range(num_clients):
+    for i in range(num_customer):
         name = "".join(random.choices(string.ascii_letters, k=10))
         surname = "".join(random.choices(string.ascii_letters, k=10))
         phone_number = int(''.join(

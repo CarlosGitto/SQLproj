@@ -4,7 +4,7 @@ INSERT INTO product
 VALUES
     vals;
 #
-INSERT INTO customer
+INSERT INTO customer_table
     (name, surname, phone_number, email)
 VALUES
     vals;

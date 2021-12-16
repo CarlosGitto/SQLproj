@@ -30,8 +30,8 @@ families = [
 expense_items = random_expense_item_engine(50, families=families)
 products = random_product_engine(10)
 purchases = random_purchase_engine(10, product=products)
-clients = random_client_table_engine(300)
-sales = random_sale_engine(1000, purchase=purchases, client=clients)
+customers = random_client_table_engine(300)
+sales = random_sale_engine(1000, purchase=purchases, customer=customers)
 assigned_expenses = random_assigned_expense_item_engine(
     200, items=expense_items)
 
@@ -58,7 +58,7 @@ sale_seed = [{"class": models.Sale, "values": sales}]
 purchase_seed = [{"class": models.Purchase, "values": purchases}]
 
 
-client_seed = [{"class": models.Client, "values": clients}]
+customer_seed = [{"class": models.Customer, "values": customers}]
 
 
 def seeder(dict_seed):
@@ -76,7 +76,7 @@ def seeder(dict_seed):
 """A list with the right order to seed the tables"""
 list_of_seed = [
     product_seed,
-    client_seed,
+    customer_seed,
     purchase_seed,
     sale_seed,
     expense_family_seed,

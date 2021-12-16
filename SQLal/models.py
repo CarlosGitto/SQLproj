@@ -44,12 +44,12 @@ class Sale(Base):
     purchase_id = Column(Integer, ForeignKey("purchase.id"))
     created_at = Column(DateTime, default=datetime.now())
     quantity = Column(Integer)
-    client_table_id = Column(Integer, ForeignKey("client_table.id"))
+    client_table_id = Column(Integer, ForeignKey("customer.id"))
 
 
-class Client(Base):
-    """Stores user data from client"""
-    __tablename__ = "client_table"
+class Customer(Base):
+    """Stores user data from customer"""
+    __tablename__ = "customer"
 
     id = Column(Integer, primary_key=True)
     name = Column(String(224), nullable=False, unique=False)
