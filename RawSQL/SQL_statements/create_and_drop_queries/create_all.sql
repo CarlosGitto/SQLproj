@@ -57,5 +57,6 @@ CREATE TABLE sale_to_purchase (
     sale_id INT,
     FOREIGN KEY (sale_id) REFERENCES sale (id),
     purchase_id INT,
-    FOREIGN KEY (purchase_id) REFERENCES purchase (id)
+    FOREIGN KEY (purchase_id) REFERENCES purchase (id),
+    quantity INT
     );
