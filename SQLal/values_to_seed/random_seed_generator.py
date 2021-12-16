@@ -37,7 +37,7 @@ def random_purchase_engine(num_purchases: int, product: List) -> List[Dict]:
     product_price = get_product_price(product = product)
 
     for i in range(num_purchases):
-        product_id = random.randint(0, product_num)
+        product_id = random.randint(1, product_num)
         cost = random.randint(1,random.choice(product_price))
         quantity = random.randint(1,300)
         in_stock = random.randint(0,quantity)
@@ -60,7 +60,7 @@ def random_purchase_engine(num_purchases: int, product: List) -> List[Dict]:
 
         }
         my_list.append(random_row)
-        return my_list
+    return my_list
 
 def random_expense_item_engine(num_expenses: int, families: List) -> List[Dict]:
     """Creates list of json objects to seed expense_item table for testing purposes."""
@@ -130,15 +130,15 @@ def random_product_engine(num_products: int) -> List[Dict]:
     return my_list
 
 
-def random_sale_engine(num_sales: int, purchase: List, customer: List) -> List[Dict]:
+def random_sale_engine(num_sales: int, product: List, customer: List) -> List[Dict]:
     """Creates list of json objects to seed sale table for testing purposes."""
 
     my_list = []
-    num_purchase = len(purchase)
+    num_product = len(product)
     num_customer = len(customer)
 
     for i in range(num_sales):
-        purchase_id = random.randint(1, num_purchase)
+        product_id = random.randint(1, num_product)
         created_at = datetime.datetime(
             random.randint(2010, 2021),
             random.randint(1, 12),
@@ -147,13 +147,11 @@ def random_sale_engine(num_sales: int, purchase: List, customer: List) -> List[D
             random.randint(1, 59),
             random.randint(1, 59)
         )
-        quantity = random.randint(1,1000)
         customer_table_id = random.randint(1, num_customer)
 
         random_row = {
-            "purchase_id": purchase_id,
+            "product_id": product_id,
             "created_at": created_at,
-            "quantity": quantity,
             "customer_table_id": customer_table_id
         }
 

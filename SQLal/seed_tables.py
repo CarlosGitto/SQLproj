@@ -4,7 +4,7 @@ from utils import session
 
 import models
 
-from values_to_seed.random_seed_generator import random_client_table_engine, random_purchase_engine, random_assigned_expense_item_engine, random_expense_family_engine, random_expense_item_engine, random_product_engine, random_sale_engine
+from values_to_seed.random_seed_generator import random_customer_table_engine, random_purchase_engine, random_assigned_expense_item_engine, random_expense_family_engine, random_expense_item_engine, random_product_engine, random_sale_engine
 
 
 
@@ -30,8 +30,8 @@ families = [
 expense_items = random_expense_item_engine(50, families=families)
 products = random_product_engine(10)
 purchases = random_purchase_engine(10, product=products)
-customers = random_client_table_engine(300)
-sales = random_sale_engine(1000, purchase=purchases, customer=customers)
+customers = random_customer_table_engine(300)
+sales = random_sale_engine(1000, product=products, customer=customers)
 assigned_expenses = random_assigned_expense_item_engine(
     200, items=expense_items)
 

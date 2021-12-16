@@ -1,6 +1,8 @@
 """This file have a function that check stock, quantity, and product"""
 
 from typing import Dict, List
+
+from sqlalchemy.orm import with_expression
 import models
 from utils import engine, session
 
@@ -19,3 +21,9 @@ def product_checker(product_id : int) -> List[Dict]:
 
     return my_list
 
+"""quantity -> sale ->update with_expression
+
+4 -> purchase_id
+costo 400
+
+client -> sale product_id ->""" 

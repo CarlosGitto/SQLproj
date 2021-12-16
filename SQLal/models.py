@@ -41,10 +41,9 @@ class Sale(Base):
     __tablename__ = "sale"
 
     id = Column(Integer, primary_key=True)
-    purchase_id = Column(Integer, ForeignKey("purchase.id"))
+    product_id = Column(Integer, ForeignKey("product.id"))
     created_at = Column(DateTime, default=datetime.now())
-    quantity = Column(Integer)
-    client_table_id = Column(Integer, ForeignKey("customer.id"))
+    customer_table_id = Column(Integer, ForeignKey("customer.id"))
 
 
 class Customer(Base):
