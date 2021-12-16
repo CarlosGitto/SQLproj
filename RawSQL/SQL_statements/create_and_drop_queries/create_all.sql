@@ -52,3 +52,10 @@ CREATE TABLE assigned_expense_item (
     state VARCHAR (225),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+CREATE TABLE sale_to_purchase (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    sale_id INT,
+    FOREIGN KEY (sale_id) REFERENCES sale (id),
+    purchase_id INT,
+    FOREIGN KEY (purchase_id) REFERENCES purchase (id)
+    );
