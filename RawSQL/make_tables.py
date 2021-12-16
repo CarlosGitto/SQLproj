@@ -6,13 +6,12 @@ create_table_queries = open(
     "SQL_statements/create_and_drop_queries/create_all.sql", "r").read().split(";")
 
 
-def create_tables() -> None:
+def create_tables(queries: list) -> None:
     """Create all tables"""
 
-    for line in create_table_queries:
+    for line in queries:
         my_cursor.execute(line)
 
 
 if __name__ == "__main__":
-
-    create_tables()
+    create_tables(create_table_queries)

@@ -4,13 +4,11 @@ import mysql.connector
 
 host = "localhost"
 user = "root"
-password = "123456"
+password = "root2021"
 db_name = "sql_challenge"
 
 
-
-
-def connection_factory(server_host: str, server_user: str, server_password: str, server_database_name: str) -> tuple[object,object]:
+def connection_factory(server_host: str, server_user: str, server_password: str, server_database_name: str) -> tuple[object, object]:
     """Establishes connection with MySQL server."""
 
     connection = mysql.connector.connect(
@@ -26,19 +24,18 @@ def connection_factory(server_host: str, server_user: str, server_password: str,
     connection.close()
 
     final_connection = mysql.connector.connect(
-        host = server_host,
-        user = server_user,
-        password = server_password,
-        database = server_database_name
+        host=server_host,
+        user=server_user,
+        password=server_password,
+        database=server_database_name
     )
     my_cursor = final_connection.cursor()
 
     return final_connection, my_cursor
 
 
-connection_db, my_cursor = connection_factory(
-                                                server_host=host, 
-                                                server_user=user,
-                                                server_password=password, 
-                                                server_database_name=db_name)
-
+my_conn, my_cursor = connection_factory(
+    server_host=host,
+    server_user=user,
+    server_password=password,
+    server_database_name=db_name)

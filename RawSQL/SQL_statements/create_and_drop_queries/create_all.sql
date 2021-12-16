@@ -1,5 +1,5 @@
 #
-CREATE TABLE client (
+CREATE TABLE customer (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR (225),
     surname VARCHAR (225),
@@ -33,8 +33,8 @@ CREATE TABLE sale (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (product_id) REFERENCES product (id),
     quantity INT,
-    client_id INT,
-    FOREIGN KEY (client_id) REFERENCES client (id)
+    customer_id INT,
+    FOREIGN KEY (customer_id) REFERENCES customer (id)
 );
 #
 CREATE TABLE assigned_expense_item (
