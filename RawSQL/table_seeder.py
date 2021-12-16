@@ -60,7 +60,7 @@ def seed_tables(products_num: int, sales_num: int, expense_items_num: int, assig
 
                 cost = random.randint(1, 2000)
                 quantity = random.randint(1, 200)
-                in_stock = random.randint(1,200)
+                in_stock = quantity
 
                 values = f'({product_id}, {quantity}, {cost}, {in_stock}, "{created_at}")'
 
@@ -68,27 +68,26 @@ def seed_tables(products_num: int, sales_num: int, expense_items_num: int, assig
                 my_cursor.execute(statement)
                 my_conn.commit()
 
-        if "sale" in sql_statement and "sale_id" not in sql_statement:
-            for i in range(sales_num):
-                purchase_id = random.randint(1, purchase_num)
+        # if "sale" in sql_statement and "sale_id" not in sql_statement:
+        #     for i in range(sales_num):
+        #         purchase_id = random.randint(1, purchase_num)
 
-                created_at = datetime.datetime(
-                    random.randint(2010, 2021),
-                    random.randint(1, 12),
-                    random.randint(1, 28),
-                    random.randint(1, 23),
-                    random.randint(1, 59),
-                    random.randint(1, 59)
-                )
+        #         created_at = datetime.datetime(
+        #             random.randint(2010, 2021),
+        #             random.randint(1, 12),
+        #             random.randint(1, 28),
+        #             random.randint(1, 23),
+        #             random.randint(1, 59),
+        #             random.randint(1, 59)
+        #         )
+        #         customer_id = random.randint(1, client_num)
+        #         quantity = random.randint(1, 5)
 
-                customer_table_id = random.randint(1, customer_num)
-                quantity = random.randint(1, 5)
+        #         values = f'({purchase_id}, "{created_at}", {quantity}, {customer_id})'
 
-                values = f'({purchase_id}, "{created_at}", {quantity}, {customer_table_id})'
-
-                statement = sql_statement.replace('vals', values)
-                my_cursor.execute(statement)
-                my_conn.commit()
+        #         statement = sql_statement.replace('vals', values)
+        #         my_cursor.execute(statement)
+        #         my_conn.commit()
 
         if "expense_family" in sql_statement:
             for i in ['("hr")', '("others")', '("fianance")', '("marketing")']:
@@ -131,5 +130,3 @@ if __name__ == "__main__":
 
    seed_tables(products_num=10, sales_num=200,
                expense_items_num=20, assigned_expense_items_num=200, customer_num=20, purchase_num=12)
-
- 

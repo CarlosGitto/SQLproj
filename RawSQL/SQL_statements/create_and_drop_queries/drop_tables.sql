@@ -1,8 +1,8 @@
-DROP TABLE customer;
-
 DROP table assigned_expense_item;
 
 DROP table sale;
+
+DROP TABLE customer;
 
 DROP table purchase;
 
