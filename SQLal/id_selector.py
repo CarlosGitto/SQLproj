@@ -1,8 +1,9 @@
 """This file take a product id and return purchase id"""
+from typing import List
 from utils import engine, session
 import models
 
-def product_id_in_purchase(sale_quantity: int, product_id : int) -> None:
+def product_id_in_purchase(sale_quantity: int, product_id : int) -> List:
 
     result = session.query(models.Purchase.id, models.Purchase.in_stock, models.Purchase.cost).filter(
         models.Purchase.product_id == product_id
@@ -36,7 +37,10 @@ def product_id_in_purchase(sale_quantity: int, product_id : int) -> None:
             session.commit()
             my_purchase_list.append(purchase[0])
             break
-
+    
+    for cost in my_cost_list:
+        print(cost)
+        
     return my_purchase_list, my_cost_list
 
 """def func():
