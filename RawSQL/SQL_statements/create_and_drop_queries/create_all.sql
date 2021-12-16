@@ -1,5 +1,5 @@
 #
-CREATE TABLE client (
+CREATE TABLE client_table (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR (225),
     surname VARCHAR (225),
@@ -14,9 +14,7 @@ CREATE TABLE expense_family (
 #
 CREATE TABLE product (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    price INT,
-    cost INT,
-    stock INT
+    price INT
 );
 #
 CREATE TABLE expense_item (
@@ -27,14 +25,24 @@ CREATE TABLE expense_item (
     FOREIGN KEY (family_id) REFERENCES expense_family (id)
 );
 #
-CREATE TABLE sale (
+CREATE TABLE purchase (
     id INT AUTO_INCREMENT PRIMARY KEY,
     product_id INT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (product_id) REFERENCES product (id),
     quantity INT,
-    client_id INT,
-    FOREIGN KEY (client_id) REFERENCES client (id)
+    price INT,
+    in_stock INT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+#
+CREATE TABLE sale (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    purchase_id INT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (purchase_id) REFERENCES purchase (id),
+    quantity INT,
+    client_table_id INT,
+    FOREIGN KEY (client_table_id) REFERENCES client_table (id)
 );
 #
 CREATE TABLE assigned_expense_item (

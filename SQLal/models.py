@@ -13,8 +13,6 @@ class Product(Base):
 
     id = Column(Integer, primary_key=True)
     price = Column(Integer, nullable=False, unique=False)
-    cost = Column(Integer, nullable=False, unique=False)
-    stock = Column(Integer, nullable=False, unique=False)
 
 
 class ExpenseFamily(Base):
@@ -25,20 +23,33 @@ class ExpenseFamily(Base):
     service_name = Column(String(225), nullable=False, unique=False)
 
 
+class Purchase(Base):
+    """Store purchase cost and stock"""
+    __tablename__ = "purchase"
+    __table_args__ = CheckConstraint("in_stock >= 0")
+
+    id = Column(Integer, primary_key=True)
+    product_id = Column(Integer, ForeignKey("product.id"))
+    quantity = Column(Integer)
+    price = Column(Integer)
+    in_stock = Column(Integer)
+    created_at = Column(DateTime, default=datetime.now())
+
+
 class Sale(Base):
     """Stores sales with their given specifications."""
     __tablename__ = "sale"
 
     id = Column(Integer, primary_key=True)
-    product_id = Column(Integer, ForeignKey("product.id"))
+    purchase_id = Column(Integer, ForeignKey("purchase.id"))
     created_at = Column(DateTime, default=datetime.now())
     quantity = Column(Integer)
-    client_id = Column(Integer, ForeignKey("client.id"))
+    client_table_id = Column(Integer, ForeignKey("client.id"))
 
 
 class Client(Base):
     """Stores user data from client"""
-    __tablename__ = "client"
+    __tablename__ = "client_table"
 
     id = Column(Integer, primary_key=True)
     name = Column(String(224), nullable=False, unique=False)
@@ -49,7 +60,7 @@ class Client(Base):
 class ExpenseItem(Base):
     """Stores expense items that will later be referred to in assigned_expense_items."""
     __tablename__ = "expense_item"
-    __table_args__ = (CheckConstraint("cost > 0.0"),)
+    __table_args__ = (CheckConstraint("cost >= 0.0"),)
 
     id = Column(Integer, primary_key=True)
     item_name = Column(String(225), nullable=False, unique=True)
