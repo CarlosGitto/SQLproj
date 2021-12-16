@@ -37,9 +37,9 @@ CREATE TABLE purchase (
 #
 CREATE TABLE sale (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    purchase_id INT,
+    product_id INT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (purchase_id) REFERENCES purchase (id),
+    FOREIGN KEY (product_id) REFERENCES product (id),
     quantity INT,
     customer_id INT,
     FOREIGN KEY (customer_id) REFERENCES customer (id)

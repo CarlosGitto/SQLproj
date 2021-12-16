@@ -43,6 +43,8 @@ class Sale(Base):
     id = Column(Integer, primary_key=True)
     product_id = Column(Integer, ForeignKey("product.id"))
     created_at = Column(DateTime, default=datetime.now())
+    sale_cost = Column(Integer)
+    quantity = Column(Integer)
     customer_table_id = Column(Integer, ForeignKey("customer.id"))
 
 

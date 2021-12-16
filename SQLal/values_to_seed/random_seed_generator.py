@@ -3,7 +3,7 @@ import random
 import string
 import datetime
 from typing import Dict, List, Union
-
+from id_selector import product_id_in_purchase
 
 def random_expense_family_engine(num_families: int) -> List[Dict]:
     """Creates list of json objects to seed expense_family table for testing purposes."""
@@ -147,11 +147,15 @@ def random_sale_engine(num_sales: int, product: List, customer: List) -> List[Di
             random.randint(1, 59),
             random.randint(1, 59)
         )
+        quantity = random.randint(1, 500)
+        purchase_indexes,sale_cost = product_id_in_purchase(sale_quantity=quantity, product_id=product_id)
         customer_table_id = random.randint(1, num_customer)
-
+        
         random_row = {
             "product_id": product_id,
             "created_at": created_at,
+            "sale_cost": sale_cost,
+            "quantity": quantity,
             "customer_table_id": customer_table_id
         }
 
