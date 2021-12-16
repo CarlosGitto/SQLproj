@@ -6,7 +6,7 @@ SELECT year(created_at) AS 'year_income',
     SUM(cost) AS 'cost_of_goods_sold', 
     (SUM(price) - SUM(cost)) AS 'gross_profit'
     FROM sale
-    JOIN product ON sale.product_id = product.id
+    JOIN purchase ON sale.purchase_id = purchase.id
     GROUP BY 1, 2
     ORDER BY 1, 2;
 #

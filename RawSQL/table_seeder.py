@@ -58,11 +58,11 @@ def seed_tables(products_num: int, sales_num: int, expense_items_num: int, assig
                     random.randint(1, 59)
                 )
 
-                price = random.randint(1, 2000)
+                cost = random.randint(1, 2000)
                 quantity = random.randint(1, 200)
                 in_stock = random.randint(1,200)
 
-                values = f'({product_id}, {quantity}, {price}, {in_stock}, "{created_at}")'
+                values = f'({product_id}, {quantity}, {cost}, {in_stock}, "{created_at}")'
 
                 statement = sql_statement.replace('vals', values)
                 my_cursor.execute(statement)

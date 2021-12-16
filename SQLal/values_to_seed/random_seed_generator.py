@@ -18,6 +18,49 @@ def random_expense_family_engine(num_families: int) -> List[Dict]:
 
     return my_list
 
+def random_purchase_engine(num_purchases: int, product: List) -> List[Dict]:
+    
+    my_list = []
+    product_num = len(product)
+
+    def get_product_price(product: List) -> List:
+
+        my_price_list = []
+
+        for i in range(product_num):
+            my_price = product[i]["price"]
+
+            my_price_list.append(my_price)
+
+        return my_price_list
+
+    product_price = get_product_price(product = product)
+
+    for i in range(num_purchases):
+        product_id = random.randint(0, product_num)
+        cost = random.randint(1,random.choice(product_price))
+        quantity = random.randint(1,300)
+        in_stock = random.randint(0,quantity)
+        
+        created_at = datetime.datetime(
+            random.randint(2010, 2021),
+            random.randint(1, 12),
+            random.randint(1, 28),
+            random.randint(1, 23),
+            random.randint(1, 59),
+            random.randint(1, 59)
+        )
+
+        random_row = {
+            "product_id": product_id,
+            "quantity": quantity,
+            "cost": cost,
+            "in_stock": in_stock,
+            "created_at": created_at
+
+        }
+        my_list.append(random_row)
+        return my_list
 
 def random_expense_item_engine(num_expenses: int, families: List) -> List[Dict]:
     """Creates list of json objects to seed expense_item table for testing purposes."""
@@ -41,21 +84,11 @@ def random_expense_item_engine(num_expenses: int, families: List) -> List[Dict]:
     return my_list
 
 
-def random_assigned_expense_item_engine(num_assigned_expenses: int, items: List, sales: List) -> List[Dict]:
+def random_assigned_expense_item_engine(num_assigned_expenses: int, items: List) -> List[Dict]:
     """Creates list of json objects to seed assigned_expense_item table for testing purposes."""
 
     my_list = []
     num_items = len(items)
-    num_sales = len(sales)
-
-    def get_random_sale_id(minval: int, maxval: int, none_probability: float) -> Union[int, None]:
-        """Takes maximum, minimum and none probability, returns either an integer or none object."""
-
-        if random.random() < none_probability:
-            return None
-        else:
-            return random.randint(minval, maxval)
-
     for i in range(num_assigned_expenses):
         item_id = random.randint(1, num_items)
 
@@ -69,13 +102,11 @@ def random_assigned_expense_item_engine(num_assigned_expenses: int, items: List,
         )
 
         state = random.choice(['pagado', 'no pagado'])
-        sale_id = get_random_sale_id(1, num_sales, 0.8)
 
         random_row = {
             "item_id": item_id,
             "state": state,
-            "created_at": created_at,
-            "sale_id": sale_id
+            "created_at": created_at
         }
 
         my_list.append(random_row)
@@ -89,29 +120,25 @@ def random_product_engine(num_products: int) -> List[Dict]:
     my_list = []
 
     for i in range(num_products):
-        price = random.randint(0, 100000)
-        cost = random.randint(0, price)
-        stock = random.randint(1, 100)
 
+        price = random.randint(0, 100000)
+        
         random_row = {
             "price": price,
-            "cost": cost,
-            "stock": stock
         }
-
         my_list.append(random_row)
-
     return my_list
 
 
-def random_sale_engine(num_sales: int, product: List) -> List[Dict]:
+def random_sale_engine(num_sales: int, purchase: List, client: List) -> List[Dict]:
     """Creates list of json objects to seed sale table for testing purposes."""
 
     my_list = []
-    num_products = len(product)
+    num_purchase = len(purchase)
+    num_client = len(client)
 
     for i in range(num_sales):
-        product_id = random.randint(1, num_products)
+        purchase_id = random.randint(1, num_purchase)
         created_at = datetime.datetime(
             random.randint(2010, 2021),
             random.randint(1, 12),
@@ -120,11 +147,39 @@ def random_sale_engine(num_sales: int, product: List) -> List[Dict]:
             random.randint(1, 59),
             random.randint(1, 59)
         )
+        quantity = random.randint(1,1000)
+        client_table_id = random.randint(1, num_client)
 
         random_row = {
-            "product_id": product_id,
-            "created_at": created_at
+            "purchase_id": purchase_id,
+            "created_at": created_at,
+            "quantity": quantity,
+            "client_table_id": client_table_id
         }
 
         my_list.append(random_row)
+    return my_list
+
+def random_client_table_engine(num_clients: int) -> List[Dict]:
+
+    my_list = []
+
+    for i in range(num_clients):
+        name = "".join(random.choices(string.ascii_letters, k=10))
+        surname = "".join(random.choices(string.ascii_letters, k=10))
+        phone_number = int(''.join(
+                    random.choices(
+                        ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'], k=9)
+                ))
+        email = "".join(random.choices(string.ascii_letters, k=10))
+
+        random_row = {
+            "name": name,
+            "surname": surname,
+            "phone_number": phone_number,
+            "email": email
+        }
+
+        my_list.append(random_row)
+
     return my_list

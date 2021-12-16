@@ -15,7 +15,7 @@ VALUES
     vals;
 #
 INSERT INTO purchase
-    (product_id, quantity, price, in_stock, created_at)
+    (product_id, quantity, cost, in_stock, created_at)
 VALUES
     vals;
 #

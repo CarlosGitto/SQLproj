@@ -26,12 +26,12 @@ class ExpenseFamily(Base):
 class Purchase(Base):
     """Store purchase cost and stock"""
     __tablename__ = "purchase"
-    __table_args__ = CheckConstraint("in_stock >= 0")
+    __table_args__ = (CheckConstraint("in_stock >= 0"),)
 
     id = Column(Integer, primary_key=True)
     product_id = Column(Integer, ForeignKey("product.id"))
     quantity = Column(Integer)
-    price = Column(Integer)
+    cost = Column(Integer)
     in_stock = Column(Integer)
     created_at = Column(DateTime, default=datetime.now())
 
@@ -44,7 +44,7 @@ class Sale(Base):
     purchase_id = Column(Integer, ForeignKey("purchase.id"))
     created_at = Column(DateTime, default=datetime.now())
     quantity = Column(Integer)
-    client_table_id = Column(Integer, ForeignKey("client.id"))
+    client_table_id = Column(Integer, ForeignKey("client_table.id"))
 
 
 class Client(Base):
