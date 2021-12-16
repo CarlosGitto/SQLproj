@@ -1,9 +1,10 @@
 """This file take a product id and return purchase id"""
-from typing import List
+from re import M
+from typing import Dict, List
 from utils import engine, session
 import models
 
-def product_id_in_purchase(sale_quantity: int, product_id : int) -> List:
+def product_id_in_purchase(sale_quantity: int, product_id : int) -> List[Dict]:
 
     result = session.query(models.Purchase.id, models.Purchase.in_stock, models.Purchase.cost).filter(
         models.Purchase.product_id == product_id
@@ -11,17 +12,18 @@ def product_id_in_purchase(sale_quantity: int, product_id : int) -> List:
 
     stock_to_buy = sale_quantity
     my_purchase_list = []
-    my_cost_list = []
 
-    
+     
 
     for purchase in result:
-        if purchase[1] < stock_to_buy:
-            my_cost_list.append(purchase[2]*stock_to_buy)
-
+        if purchase[1] < stock_to_buy and purchase[1] > 0:
             stock_to_buy = stock_to_buy - purchase[1]
 
-            my_purchase_list.append(purchase[0])
+            my_purchase_list.append({
+                "purchase_id": purchase[0],
+                "cost": purchase[2]*purchase[1],
+                "quantity":purchase[1]
+                })
             
             session.query(models.Purchase).filter(
                 models.Purchase.id == purchase[0]
@@ -29,25 +31,22 @@ def product_id_in_purchase(sale_quantity: int, product_id : int) -> List:
             session.commit()
 
         else:
-            my_cost_list.append(purchase[2]*stock_to_buy)
-
+            my_purchase_list.append({
+                "purchase_id": purchase[0],
+                "cost": purchase[2]*stock_to_buy,
+                "quantity":stock_to_buy
+                })
             session.query(models.Purchase).filter(
                 models.Purchase.id == purchase[0]
             ).update({"in_stock": f'{purchase[1] - stock_to_buy}'})
             session.commit()
-            my_purchase_list.append(purchase[0])
             break
     
-    for cost in my_cost_list:
-        print(cost)
+
         
-    return my_purchase_list, my_cost_list
+    return my_purchase_list
 
-"""def func():
-    cost_sale = product_id_in_purchase()
 
-    engine.execute("INSERT INTO VIEW sale_cost (cost) value cost_sale
-    where id_ssale == 1")
-"""
-    
-product_id_in_purchase(sale_quantity=107, product_id=4)
+#x = product_id_in_purchase(474, 1)
+
+#print(x)

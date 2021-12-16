@@ -43,7 +43,6 @@ class Sale(Base):
     id = Column(Integer, primary_key=True)
     product_id = Column(Integer, ForeignKey("product.id"))
     created_at = Column(DateTime, default=datetime.now())
-    sale_cost = Column(Integer)
     quantity = Column(Integer)
     customer_table_id = Column(Integer, ForeignKey("customer.id"))
 
@@ -78,3 +77,12 @@ class AssignedExpenseItem(Base):
     item_id = Column(Integer, ForeignKey("expense_item.id"))
     state = Column(String(224))
     created_at = Column(DateTime, default=datetime.now())
+
+class SaleToPurchase(Base):
+    """Stores ids_purchases for each sale_id"""
+    __tablename__ = "sale_to_purchase"
+    
+    id = Column(Integer, primary_key=True)
+    sale_id = Column(Integer, ForeignKey("sale.id"))
+    purchase_id = Column(Integer, ForeignKey("purchase.id"))
+    quantity = Column(Integer)

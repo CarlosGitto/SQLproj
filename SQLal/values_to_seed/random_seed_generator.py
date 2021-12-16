@@ -148,13 +148,11 @@ def random_sale_engine(num_sales: int, product: List, customer: List) -> List[Di
             random.randint(1, 59)
         )
         quantity = random.randint(1, 500)
-        purchase_indexes,sale_cost = product_id_in_purchase(sale_quantity=quantity, product_id=product_id)
         customer_table_id = random.randint(1, num_customer)
         
         random_row = {
             "product_id": product_id,
             "created_at": created_at,
-            "sale_cost": sale_cost,
             "quantity": quantity,
             "customer_table_id": customer_table_id
         }
@@ -185,3 +183,29 @@ def random_customer_table_engine(num_customer: int) -> List[Dict]:
         my_list.append(random_row)
 
     return my_list
+
+def random_sale_to_purchase_engine(sale: List[Dict]) -> List[Dict]:
+    print(sale)
+    my_list = []
+
+    for i in range(1):
+        sale_id = i
+        quantity = sale[i]["quantity"]
+        product_id = sale[i]["product_id"]
+        print(quantity, product_id)# -> 474 1
+
+        purchase_list = product_id_in_purchase(sale_quantity=quantity, product_id=product_id)
+        
+        print(purchase_list)# -> []
+
+        for purchase_dict in purchase_list:
+
+            random_row = {
+                "sale_id": sale_id,
+                "purchase_id": purchase_dict["purchase_id"],
+                "quantity": purchase_dict["quantity"]
+            }
+
+            my_list.append(random_row)
+    print(my_list) 
+     
