@@ -25,5 +25,7 @@ def create_views() -> None:
 
 
 if __name__ == "__main__":
-
-    create_views()
+    try:
+        create_views()
+    except:
+        print('Views already created.')

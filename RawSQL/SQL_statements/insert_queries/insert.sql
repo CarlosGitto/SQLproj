@@ -4,13 +4,18 @@ INSERT INTO product
 VALUES
     vals;
 #
+INSERT INTO customer
+    (name, surname, phone_number, email)
+VALUES
+    vals;
+#
 INSERT INTO expense_family
     (service_name)
 VALUES
     vals;
 #
 INSERT INTO sale
-    (product_id, created_at, quantity, client_id)
+    (product_id, created_at, quantity, customer_id)
 VALUES
     vals;
 #
@@ -21,10 +26,5 @@ VALUES
 #
 INSERT INTO assigned_expense_item
     (item_id, state, created_at)
-VALUES
-    vals;
-#
-INSERT INTO client
-    (name, surname, phone_number, email)
 VALUES
     vals;

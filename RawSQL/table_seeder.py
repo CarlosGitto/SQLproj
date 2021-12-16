@@ -1,6 +1,7 @@
 """Seeds table with random data for testing purposes."""
 
 import datetime
+from os import stat
 import random
 import string
 from config import my_cursor, my_conn
@@ -29,15 +30,17 @@ def seed_tables(products_num: int, sales_num: int, expense_items_num: int, assig
                 my_cursor.execute(statement)
                 my_conn.commit()
 
-        if 'client' in sql_statement and 'client_id' not in sql_statement:
+        if 'customer' in sql_statement and 'customer_id' not in sql_statement:
             for i in range(client_num):
                 name = ''.join(random.choices(string.ascii_letters, k=10))
                 surname = ''.join(random.choices(string.ascii_letters, k=10))
-                phone_number = int(
-                    ''.join(random.choices(random.randint(0, 9), k=10)))
+                phone_number = int(''.join(
+                    random.choices(
+                        ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'], k=9)
+                ))
                 email = ''.join(random.choices(string.ascii_letters, k=10))
 
-                values = f'({name}, {surname}, {phone_number}, {email})'
+                values = f'("{name}", "{surname}", {phone_number}, "{email}")'
 
                 statement = sql_statement.replace('vals', values)
                 my_cursor.execute(statement)
@@ -56,12 +59,12 @@ def seed_tables(products_num: int, sales_num: int, expense_items_num: int, assig
                     random.randint(1, 59)
                 )
 
-                client_id = random.randint(1, client_num)
+                customer_id = random.randint(1, client_num)
                 quantity = random.randint(1, 5)
 
-                values = f'({product_id}, {created_at}, {quantity}, {client_id})'
-
-                statement = sql_statement.replace('vals', values)
+                values = f'({product_id}, "{created_at}", {quantity}, {customer_id})'
+                statement = sql_statement.replace(
+                    'vals', values).strip('\n')
                 my_cursor.execute(statement)
                 my_conn.commit()
 
@@ -76,7 +79,7 @@ def seed_tables(products_num: int, sales_num: int, expense_items_num: int, assig
                 item_name = ''.join(random.choices(string.ascii_letters, k=10))
                 item_family = random.randint(1, 4)
                 item_cost = random.uniform(0.0, 20000.0)
-                values = f'({item_name}, {item_family}, {item_cost})'
+                values = f'("{item_name}", {item_family}, {item_cost})'
 
                 statement = sql_statement.replace('vals', values)
                 my_cursor.execute(statement)
@@ -99,7 +102,7 @@ def seed_tables(products_num: int, sales_num: int, expense_items_num: int, assig
                     random.randint(1, 59),
                     random.randint(1, 59)
                 )
-                values = f'({item_id}, {state}, {created_at})'
+                values = f'({item_id}, "{state}", "{created_at}")'
 
                 statement = sql_statement.replace('vals', values)
                 my_cursor.execute(statement)
