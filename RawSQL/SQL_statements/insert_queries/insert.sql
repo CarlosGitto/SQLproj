@@ -4,7 +4,7 @@ INSERT INTO product
 VALUES
     vals;
 #
-INSERT INTO customer_table
+INSERT INTO customer
     (name, surname, phone_number, email)
 VALUES
     vals;
@@ -15,17 +15,12 @@ VALUES
     vals;
 #
 INSERT INTO purchase
-    (product_id, quantity, cost, in_stock, created_at)
-VALUES
-    vals;
-#
-INSERT INTO client_table
-    (name, surname, phone_number, email)
+    (product_id, quantity, price, in_stock, created_at)
 VALUES
     vals;
 #
 INSERT INTO sale
-    (purchase_id, created_at, quantity, client_table_id)
+    (purchase_id, created_at, quantity, customer_id)
 VALUES
     vals;
 #

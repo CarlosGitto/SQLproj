@@ -28,8 +28,8 @@ def seed_tables(products_num: int, sales_num: int, expense_items_num: int, assig
                 my_cursor.execute(statement)
                 my_conn.commit()
 
-        if 'customer_table' in sql_statement and 'customer_table_id' not in sql_statement:
-            
+        if 'customer' in sql_statement and 'customer_id' not in sql_statement:
+
             for i in range(customer_num):
                 name = ''.join(random.choices(string.ascii_letters, k=10))
                 surname = ''.join(random.choices(string.ascii_letters, k=10))
@@ -128,5 +128,5 @@ def seed_tables(products_num: int, sales_num: int, expense_items_num: int, assig
 
 if __name__ == "__main__":
 
-   seed_tables(products_num=10, sales_num=200,
-               expense_items_num=20, assigned_expense_items_num=200, customer_num=20, purchase_num=12)
+    seed_tables(products_num=10, sales_num=200,
+                expense_items_num=20, assigned_expense_items_num=200, customer_num=20, purchase_num=12)
