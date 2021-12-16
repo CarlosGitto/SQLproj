@@ -10,7 +10,10 @@ def create_tables(queries: list) -> None:
     """Create all tables"""
 
     for line in queries:
-        my_cursor.execute(line)
+        try:
+            my_cursor.execute(line)
+        except:
+            pass
 
 
 if __name__ == "__main__":

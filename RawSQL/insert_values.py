@@ -11,11 +11,11 @@ insert_statements = open(
 
 if __name__ == '__main__':
 
-    for i in insert_statements:
-        if table in i and ''.join([table, '_id']) not in i:
+    if table == 'sale':
+        pass
 
-            values = '(' + values + ')'
-            statement = i.replace('vals', values)
+    else:
+        statement = f"INSERT INTO {table} VALUES {values};"
 
-            my_cursor.execute(statement)
-            my_conn.commit()
+        my_cursor.execute(statement)
+        my_conn.commit()

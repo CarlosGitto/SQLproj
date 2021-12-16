@@ -12,14 +12,20 @@ drop_views_statements = open(
 def drop_tables() -> None:
     """Drop all tables"""
     for line in drop_table_statements:
-        my_cursor.execute(line)
+        try:
+            my_cursor.execute(line)
+        except:
+            pass
 
 
 def drop_views() -> None:
     """Drop all views"""
 
     for line in drop_views_statements:
-        my_cursor.execute(line)
+        try:
+            my_cursor.execute(line)
+        except:
+            pass
 
 
 if __name__ == "__main__":
