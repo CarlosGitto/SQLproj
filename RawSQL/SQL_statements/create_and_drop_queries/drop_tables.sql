@@ -1,3 +1,5 @@
+DROP TABLE sale_to_purchase;
+
 DROP table assigned_expense_item;
 
 DROP table sale;

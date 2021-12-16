@@ -1,8 +1,10 @@
-"""This file take a product id and return purchase id"""
+"""This file takes a product id and returns purchase id"""
 from utils import engine, session
 import models
 
-def product_id_in_purchase(sale_quantity: int, product_id : int) -> None:
+
+def product_id_in_purchase(sale_quantity: int, product_id: int) -> None:
+    """Links sale to purchase for accounting purposes."""
 
     result = session.query(models.Purchase.id, models.Purchase.in_stock, models.Purchase.cost).filter(
         models.Purchase.product_id == product_id
@@ -35,11 +37,12 @@ def product_id_in_purchase(sale_quantity: int, product_id : int) -> None:
 
     print(my_purchase_list)
 
+
 """def func():
     cost_sale = product_id_in_purchase()
 
     engine.execute("INSERT INTO VIEW sale_cost (cost) value cost_sale
     where id_ssale == 1")"""
 
-    
+
 product_id_in_purchase(sale_quantity=107, product_id=4)
