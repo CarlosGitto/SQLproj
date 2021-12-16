@@ -1,6 +1,6 @@
 #
 INSERT INTO product
-    (price, cost, stock)
+    (price)
 VALUES
     vals;
 #
@@ -14,8 +14,18 @@ INSERT INTO expense_family
 VALUES
     vals;
 #
+INSERT INTO purchase
+    (product_id, quantity, price, in_stock, created_at)
+VALUES
+    vals;
+#
+INSERT INTO client_table
+    (name, surname, phone_number, email)
+VALUES
+    vals;
+#
 INSERT INTO sale
-    (product_id, created_at, quantity, customer_id)
+    (purchase_id, created_at, quantity, client_table_id)
 VALUES
     vals;
 #
