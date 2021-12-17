@@ -1,9 +1,12 @@
 """This file create views in the database using statements in '.sql' files"""
 from utils import engine
 
-
 income_statement_by_month = "SQL_views/income_statement_by_month.sql"
 income_statement_by_year = "SQL_views/income_statement_by_year.sql"
+revenue_evolution = "SQL_views/revenue_growth.sql"
+
+views_list = [income_statement_by_month,
+              income_statement_by_year, revenue_evolution]
 
 
 def sql_parser(file_path: str) -> list[str]:
@@ -21,7 +24,7 @@ def sql_parser(file_path: str) -> list[str]:
 def view_generator() -> None:
     """Creates or updates views inside the dbrm."""
     with engine.connect() as conn:
-        for i in [income_statement_by_month, income_statement_by_year]:
+        for i in views_list:
             print(f'...creating or updating view for {i}')
             for s in sql_parser(i):
                 conn.execute(s)

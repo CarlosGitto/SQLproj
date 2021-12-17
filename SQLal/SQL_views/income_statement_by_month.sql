@@ -1,12 +1,20 @@
 CREATE OR REPLACE VIEW income_by_month AS
-SELECT year(created_at) AS 'year_income', 
-    month(created_at) AS 'month_income', 
-    SUM(price) AS 'sales', 
-    SUM(cost) AS 'cost_of_goods_sold', 
-    (SUM(price) - SUM(cost)) AS 'gross_profit'
-    FROM sale
-    LEFT JOIN purchase ON sale.product_id = purchase.product_id
-    LEFT JOIN product on sale.product_id = product.id
+SELECT year(s.created_at) AS 'year_income', 
+    month(s.created_at) AS 'month_income', 
+    SUM(product.price * p_cost.quantity) AS 'sales',
+    SUM(p_cost.total_cost) AS 'cost_of_goods_sold',
+    (SUM(product.price * p_cost.quantity) - SUM(p_cost.total_cost)
+    ) AS 'gross_profit'
+    FROM sale AS s
+    JOIN (
+    SELECT sp.sale_id, sp.quantity, (SUM(p.cost * p.quantity)) AS 'total_cost' FROM sale_to_purchase AS sp
+    JOIN purchase AS p
+    ON sp.purchase_id = p.id
+    GROUP BY sale_id
+    ) AS p_cost
+    ON s.id = p_cost.sale_id
+    JOIN product
+    ON s.product_id = product.id
     GROUP BY 1, 2
     ORDER BY 1, 2;
 #
