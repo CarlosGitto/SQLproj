@@ -5,7 +5,7 @@ from typing import Dict, List
 from sqlalchemy.orm import with_expression
 import models
 from utils import engine, session
-
+import sys 
 def product_checker(product_id : int) -> List[Dict]:
 
     """Use the product_id to return the stock and quantity of it"""
@@ -14,12 +14,12 @@ def product_checker(product_id : int) -> List[Dict]:
 
     result = session.query(models.Purchase.in_stock, models.Purchase.quantity).filter(
         models.Purchase.product_id == product_id
-    ).one()
+    ).all()
 
     for i, value in enumerate(result):
         my_list.append(value)
 
-    return my_list
+    print( my_list)
 
 """quantity -> sale ->update with_expression
 
@@ -27,3 +27,9 @@ def product_checker(product_id : int) -> List[Dict]:
 costo 400
 
 client -> sale product_id ->""" 
+
+if __name__ == "__main__":
+
+    tag = sys.argv[1]
+
+    product_checker(tag)

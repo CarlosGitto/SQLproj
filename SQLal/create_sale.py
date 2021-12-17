@@ -4,8 +4,7 @@ from models import Sale, SaleToPurchase, Purchase
 
 from utils import session
 import sys
-
-args = [10, '2021-06-09 10:32:46', 25, 6]
+#args = [10, '2021-06-09 10:32:46', 25, 6]
 
 arguments = sys.argv
 

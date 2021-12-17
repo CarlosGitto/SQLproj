@@ -3,6 +3,7 @@ import random
 import string
 import datetime
 from typing import Dict, List, Union
+from create_sale import sale_creator
 from id_selector import product_id_in_purchase
 
 
@@ -188,29 +189,24 @@ def random_customer_engine(num_customer: int) -> List[Dict]:
 
     return my_list
 
+def random_sale_creator_engine(product: int, customer: int) -> None:
+    sale_num = random.randint(1,1000)
+    product_id = random.randint(1, product)
+    customer_id = random.randint(1, customer)
+    sale_date = datetime.datetime(
+        random.randint(2010, 2021),
+        random.randint(1, 12),
+        random.randint(1, 28),
+        random.randint(1, 23),
+        random.randint(1, 59),
+        random.randint(1, 59)
+    )
+    sale_date = str(sale_date)
+    
+    my_list = ["",product_id, sale_date, sale_num, customer_id]
+    
 
-# def random_sale_to_purchase_engine(sale: List[Dict]) -> List[Dict]:
-#     print(sale)
-#     my_list = []
+    sale_creator(my_list)
 
-#     for i in range(1):
-#         sale_id = i
-#         quantity = sale[i]["quantity"]
-#         product_id = sale[i]["product_id"]
-#         print(quantity, product_id)  # -> 474 1
 
-#         purchase_list = product_id_in_purchase(
-#             sale_quantity=quantity, product_id=product_id)
 
-#         print(purchase_list)  # -> []
-
-#         for purchase_dict in purchase_list:
-
-#             random_row = {
-#                 "sale_id": sale_id,
-#                 "purchase_id": purchase_dict["purchase_id"],
-#                 "quantity": purchase_dict["quantity"]
-#             }
-
-#             my_list.append(random_row)
-#     print(my_list)
