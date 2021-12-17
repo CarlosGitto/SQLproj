@@ -3,4 +3,6 @@ from utils import engine, Base
 import models
 
 """Create all tables"""
-Base.metadata.create_all(engine)
+
+if __name__ == '__main__':
+    Base.metadata.create_all(engine)
