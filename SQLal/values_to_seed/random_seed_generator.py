@@ -193,6 +193,7 @@ def random_sale_creator_engine(sale_num: int,product: int, customer: int) -> Non
     
     
     for i in range(sale_num):
+        
         sale_quantity = random.randint(1, 500)
         product_id = random.randint(1, product)
         customer_id = random.randint(1, customer)
