@@ -1,26 +1,33 @@
-"""This file select table/s to show"""
-from utils import session
+"""This file selects table/s to show"""
+from utils import engine,session
 from models import Product, Sale, ExpenseFamily, ExpenseItem, Customer
 from models import AssignedExpenseItem as assei
 from models import SaleToPurchase as stp
 import sys
+import pandas as pd
 
 
 def select_product():
-    s = session.query(Product.id, Product.price, Product.cost, Product.stock).all()
+    s = session.query(Product.id, Product.price).all()
     return s
+
 
 def select_family():
     s = session.query(ExpenseFamily.id, ExpenseFamily.service_name).all()
     return s
 
+
 def select_item():
-    s = session.query(ExpenseItem.id, ExpenseItem.item_name, ExpenseItem.family_id, ExpenseItem.cost).all()
+    s = session.query(ExpenseItem.id, ExpenseItem.item_name,
+                      ExpenseItem.family_id, ExpenseItem.cost).all()
     return s
 
+
 def select_assigned():
-    s = session.query(assei.id, assei.item_id, assei.state, assei.created_at, assei.sale_id).all()
+    s = session.query(assei.id, assei.item_id, assei.state,
+                      assei.created_at).all()
     return s
+
 
 def select_sale():
     s = session.query(Sale.id, Sale.product_id, Sale.created_at).all()
@@ -36,18 +43,20 @@ def select_customer():
 
 
 list_of_select = [
-    select_product,
-    select_customer,
-    select_sale_to_purchase,
-    select_sale,
-    select_family,
-    select_item,
-    select_assigned
+    "product",
+    "customer",
+    "sale_to_purchase",
+    "sale",
+    "expense_family",
+    "expense_item",
+    "assigned_expense_item"
 ]
+
 
 def show_table(s):
     for item in s:
         print(item)
+
 
 def circular():
     for func in list_of_select:
@@ -58,39 +67,38 @@ def circular():
 
 
 if __name__ == "__main__":
-    
+
     tag = sys.argv[1]
 
     if tag == "product":
-        print("PRODUCT TABLE")
-        show_table(select_product())
+        df = pd.read_sql(f"SELECT * FROM {tag};", con=engine)
+        print(df)
 
     if tag == "sale":
-        print("SALE TABLE")
-        show_table(select_sale())
+        df = pd.read_sql(f"SELECT * FROM {tag};", con=engine)
+        print(df)
 
     if tag == "item":
-        print("EXPENSE ITEM TABLE")
-        show_table(select_item())
+        df = pd.read_sql(f"SELECT * FROM {tag};", con=engine)
+        print(df)
 
     if tag == "family":
-        print("EXPENSE FAMILY TABLE")
-        show_table(select_family())
+        df = pd.read_sql(f"SELECT * FROM {tag};", con=engine)
+        print(df)
 
     if tag == "assei":
-        print("ASSIGNED EXPENSE ITEM TABLE")
-        show_table(select_assigned())
+        df = pd.read_sql(f"SELECT * FROM {tag};", con=engine)
+        print(df)
 
     if tag == "stp":
-        print("SALE TO PURCHASE TABLE")
-        show_table(select_sale_to_purchase())
-
+        df = pd.read_sql(f"SELECT * FROM {tag};", con=engine)
+        print(df)
     if tag == "cust":
-        print("Customer TABLE")
-        show_table(select_customer())
+        df = pd.read_sql(f"SELECT * FROM {tag};", con=engine)
+        print(df)
 
     if tag == "all":
-        print("ALL tables")
-        circular()
-
-
+        for table in list_of_select:
+            df = pd.read_sql(f"SELECT * FROM {table};", con=engine)
+            print(table.upper(),"\n\n",df , "\n\n\n")
+    

@@ -48,8 +48,7 @@ def sale_creator(arguments: list[int, str]) -> None:
         Purchase.product_id == product_id).order_by(Purchase.created_at.asc()).all()
     # Batches are returned in ascending order (filtered by created_at) for FIFO exit method.
 
-    new_batches, used_stock = batch_iterator(
-        quantity=quantity, batches=batches)
+    new_batches, used_stock = batch_iterator(quantity=quantity, batches=batches)
 
     """Gets batches necessary to fulfill the quantity required by the sale and modifies stock in those rows."""
     for i in range(len(new_batches)):
