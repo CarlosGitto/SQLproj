@@ -25,4 +25,4 @@ if __name__ == "__main__":
             print(df)
 
     if sys.argv not in [i[0] for i in list_of_views]:
-        print('Id not recognized.')
+        print('Id could not be recognized.')
