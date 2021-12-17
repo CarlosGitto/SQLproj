@@ -9,6 +9,7 @@ arguments = sys.argv
 
 
 def batch_iterator(quantity: int, batches: list[tuple[int]]) -> None:
+    """Iterates through batches to check which ones should be modified and by what quantity."""
 
     batches = [list(i) for i in batches]
 
@@ -68,7 +69,7 @@ def sale_creator(arguments: list[int, str]) -> None:
 
     """Creates and commits all purchases linked to the sale to the sale_to_purchase table."""
     new_sale_id = session.query(Sale.id).order_by(
-        Sale.created_at.desc()).first()
+        Sale.id.desc()).first()
 
     for purchase_id, stock_used in used_stock:
         new_sale_to_purchase = SaleToPurchase(
