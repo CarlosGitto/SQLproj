@@ -1,10 +1,12 @@
 """This file seed the tables with random values"""
 
+
 from utils import session
 
 import models
 
-from values_to_seed.random_seed_generator import random_customer_engine, random_purchase_engine, random_assigned_expense_item_engine, random_expense_item_engine, random_product_engine
+from values_to_seed.random_seed_generator import random_sale_creator_engine, random_customer_engine, random_purchase_engine, random_assigned_expense_item_engine, random_expense_item_engine, random_product_engine
+
 
 
 """Seeds database with random values used for testing purposes."""
@@ -87,3 +89,4 @@ list_of_seed = [
 if __name__ == "__main__":
     for seed in list_of_seed:
         seeder(seed)
+    random_sale_creator_engine(sale_num=30, product=len(products), customer=len(customers) )

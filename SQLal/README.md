@@ -71,16 +71,7 @@ python select_view.py [arg1] [arg2]**
 
     all     >>  all views
 
-### Restart
-
-```
-python drop_all_views.py
-
-python drop_all_tables.py
-```
-
-### Go to Step 1
-
+### Optional Step
 ## Sales creation
 
 ```
@@ -95,3 +86,14 @@ python create_sale.py [args]**
     [arg4] >> customer_id
 
 This script also modifies all tables related to sales.
+
+## Restart
+
+```
+python drop_all_views.py
+
+python drop_all_tables.py
+```
+
+### Go to Step 1
+
