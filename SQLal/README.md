@@ -27,7 +27,7 @@ python make_all_views.py
 ### Fill tables with random Data
 
 ```
-python seed_tables.py
+python table_seeder.py
 ```
 
 ## Step 3
@@ -47,7 +47,9 @@ python select_table.py [arg]*
     item     >> expense_item 
     family   >> expense_family
     assei    >> assigned_expense_item 
-
+    stp      >> sale_to_purchase
+    cust     >> customer
+    
     all      >> all tables
 
 ```

@@ -1,7 +1,8 @@
 """This file select table/s to show"""
 from utils import session
-from models import Product, Sale, ExpenseFamily, ExpenseItem
+from models import Product, Sale, ExpenseFamily, ExpenseItem, Customer
 from models import AssignedExpenseItem as assei
+from models import SaleToPurchase as stp
 import sys
 
 
@@ -25,8 +26,19 @@ def select_sale():
     s = session.query(Sale.id, Sale.product_id, Sale.created_at).all()
     return s
 
+def select_sale_to_purchase():
+    s = session.query(stp.id, stp.purchase_id, stp.quantity, stp.sale_id).all()
+    return s
+
+def select_customer():
+    s = session.query(Customer.id, Customer.name, Customer.surname, Customer.phone_number, Customer.email).all()
+    return s
+
+
 list_of_select = [
     select_product,
+    select_customer,
+    select_sale_to_purchase,
     select_sale,
     select_family,
     select_item,
@@ -68,6 +80,14 @@ if __name__ == "__main__":
     if tag == "assei":
         print("ASSIGNED EXPENSE ITEM TABLE")
         show_table(select_assigned())
+
+    if tag == "stp":
+        print("SALE TO PURCHASE TABLE")
+        show_table(select_sale_to_purchase())
+
+    if tag == "cust":
+        print("Customer TABLE")
+        show_table(select_customer())
 
     if tag == "all":
         print("ALL tables")
