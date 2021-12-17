@@ -89,4 +89,4 @@ list_of_seed = [
 if __name__ == "__main__":
     for seed in list_of_seed:
         seeder(seed)
-    random_sale_creator_engine(product=len(products), customer=len(customers) )
+    random_sale_creator_engine(sale_num=30, product=len(products), customer=len(customers) )

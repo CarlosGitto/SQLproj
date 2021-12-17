@@ -189,24 +189,27 @@ def random_customer_engine(num_customer: int) -> List[Dict]:
 
     return my_list
 
-def random_sale_creator_engine(product: int, customer: int) -> None:
-    sale_num = random.randint(1,1000)
-    product_id = random.randint(1, product)
-    customer_id = random.randint(1, customer)
-    sale_date = datetime.datetime(
-        random.randint(2010, 2021),
-        random.randint(1, 12),
-        random.randint(1, 28),
-        random.randint(1, 23),
-        random.randint(1, 59),
-        random.randint(1, 59)
-    )
-    sale_date = str(sale_date)
+def random_sale_creator_engine(sale_num: int,product: int, customer: int) -> None:
     
-    my_list = ["",product_id, sale_date, sale_num, customer_id]
     
+    for i in range(sale_num):
+        sale_quantity = random.randint(1, 500)
+        product_id = random.randint(1, product)
+        customer_id = random.randint(1, customer)
+        sale_date = datetime.datetime(
+            random.randint(2010, 2021),
+            random.randint(1, 12),
+            random.randint(1, 28),
+            random.randint(1, 23),
+            random.randint(1, 59),
+            random.randint(1, 59)
+        )
+        sale_date = str(sale_date)
+        
+        my_list = ["",product_id, sale_date, sale_quantity, customer_id]
+        
 
-    sale_creator(my_list)
+        sale_creator(my_list)
 
 
 
