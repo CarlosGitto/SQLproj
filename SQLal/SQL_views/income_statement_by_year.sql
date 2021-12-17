@@ -1,21 +1,19 @@
+#
 CREATE OR REPLACE VIEW income_by_year AS
 SELECT year(s.created_at) AS 'year_income', 
-    SUM(product.price * p_cost.quantity) AS 'sales',
-    SUM(p_cost.total_cost) AS 'cost_of_goods_sold',
-    (SUM(product.price * p_cost.quantity) - SUM(p_cost.total_cost)
+    SUM((stp.quantity * prd.price)) AS 'sales',
+    SUM((stp.quantity * pur.cost)) AS 'cost_of_goods_sold',
+    (
+    SUM((stp.quantity * prd.price)) - SUM((stp.quantity * pur.cost))
     ) AS 'gross_profit'
-    FROM sale AS s
-    JOIN (
-    SELECT sp.sale_id, sp.quantity, (SUM(p.cost * p.quantity)) AS 'total_cost' FROM sale_to_purchase AS sp
-    JOIN purchase AS p
-    ON sp.purchase_id = p.id
-    GROUP BY sale_id
-    ) AS p_cost
-    ON s.id = p_cost.sale_id
-    JOIN product
-    ON s.product_id = product.id
-    GROUP BY 1
-    ORDER BY 1;
+    FROM sale_to_purchase AS stp
+    JOIN purchase AS pur
+    ON stp.purchase_id = pur.id
+    JOIN sale AS s
+    ON s.id = stp.sale_id
+    JOIN product AS prd
+    ON s.product_id = prd.id
+    GROUP BY 1;
 #
 CREATE OR REPLACE VIEW expenses_by_year AS
 SELECT year(created_at) AS 'year_expense', 
@@ -34,11 +32,10 @@ SELECT year(created_at) AS 'year_expense',
     ON a.item_id = e.id
     JOIN expense_family AS f
     ON e.family_id = f.id
-    GROUP BY 1
-    ORDER BY 1;
+    GROUP BY 1;
 #
 CREATE OR REPLACE VIEW income_statement_by_year AS
-SELECT year_income AS 'year', 
+SELECT year_income AS 'year',  
     sales, 
     cost_of_goods_sold, 
     gross_profit,
