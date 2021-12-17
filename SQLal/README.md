@@ -6,15 +6,14 @@ The objective of this challenge was to create a command line application simulat
 
 Please before start, check you have install 'python 3.10.0' and be sure to check the "requirements.txt" file
 
-
 ## Runing with perzonaliced settings
 
 To define your own user, password, host, port and database name (db_name), change the variables in *utils.py* file or you can use the default values
 
 Then follow the steps
 
-
 ## Step 1
+
 ### Build the database, tables and views
 
 ```
@@ -24,6 +23,7 @@ python make_all_views.py
 ```
 
 ## Step 2
+
 ### Fill tables with random Data
 
 ```
@@ -31,12 +31,12 @@ python seed_tables.py
 ```
 
 ## Step 3
+
 ### Select the table or the view you want to see
 
 ```
 python select_table.py [arg]*
 ```
-
 
     *[arg] is the name of the table you wish to see:
     
@@ -51,12 +51,13 @@ python select_table.py [arg]*
     all      >> all tables
 
 ```
-pyhton select_view.py [arg1] [arg2]**
+python select_view.py [arg1] [arg2]**
 ```
+
     
     **  [arg1] Can be "month" or "year"
 
-    [arg2] Is to know wich of the views releated to [arg1] you want to see
+    [arg2] Is to know which of the views related to [arg1] you want to see
 
     command  -  view table
 
@@ -70,7 +71,7 @@ pyhton select_view.py [arg1] [arg2]**
 
     all     >>  all views
 
-## Restart
+### Restart
 
 ```
 python drop_all_views.py
@@ -78,4 +79,19 @@ python drop_all_views.py
 python drop_all_tables.py
 ```
 
-## Go to Step 1
+### Go to Step 1
+
+## Sales creation
+
+```
+python create_sale.py [args]**
+```
+
+    ** Args consist of values for columns in the sales table.
+
+    [arg1] >> product_id
+    [arg2] >> created_at, must be in "YYYY-MM-DD HH:MM:SS" format
+    [arg3] >> quantity
+    [arg4] >> customer_id
+
+This script also modifies all tables related to sales.

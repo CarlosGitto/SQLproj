@@ -4,10 +4,7 @@ from utils import session
 
 import models
 
-from values_to_seed.random_seed_generator import random_sale_to_purchase_engine, random_customer_table_engine, random_purchase_engine, random_assigned_expense_item_engine, random_expense_family_engine, random_expense_item_engine, random_product_engine, random_sale_engine
-
-
-
+from values_to_seed.random_seed_generator import random_customer_engine, random_purchase_engine, random_assigned_expense_item_engine, random_expense_item_engine, random_product_engine
 
 
 """Seeds database with random values used for testing purposes."""
@@ -30,12 +27,11 @@ families = [
 expense_items = random_expense_item_engine(50, families=families)
 products = random_product_engine(10)
 purchases = random_purchase_engine(1000, product=products)
-customers = random_customer_table_engine(300)
-sales = random_sale_engine(10, product=products, customer=customers)
-random_sale_to_purchase_engine(sale=sales)
+customers = random_customer_engine(300)
+# sales = random_sale_engine(10, product=products, customer=customers)
+# random_sale_to_purchase_engine(sale=sales)
 assigned_expenses = random_assigned_expense_item_engine(
     200, items=expense_items)
-
 
 
 expense_item_seed = [
@@ -53,7 +49,7 @@ assigned_expense_seed = [
 product_seed = [{"class": models.Product, "values": products}]
 
 
-sale_seed = [{"class": models.Sale, "values": sales}]
+# sale_seed = [{"class": models.Sale, "values": sales}]
 
 
 purchase_seed = [{"class": models.Purchase, "values": purchases}]
@@ -62,6 +58,7 @@ purchase_seed = [{"class": models.Purchase, "values": purchases}]
 customer_seed = [{"class": models.Customer, "values": customers}]
 
 #sale_to_purchase_seed = [{"class": models.SaleToPurchase, "values": sales_to_purchases}]
+
 
 def seeder(dict_seed):
     """Using for loop to seed each table in the database"""
@@ -80,8 +77,8 @@ list_of_seed = [
     product_seed,
     customer_seed,
     purchase_seed,
-    sale_seed,
-    #sale_to_purchase_seed,
+    # sale_seed,
+    # sale_to_purchase_seed,
     expense_family_seed,
     expense_item_seed,
     assigned_expense_seed

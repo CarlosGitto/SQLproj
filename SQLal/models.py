@@ -44,7 +44,7 @@ class Sale(Base):
     product_id = Column(Integer, ForeignKey("product.id"))
     created_at = Column(DateTime, default=datetime.now())
     quantity = Column(Integer)
-    customer_table_id = Column(Integer, ForeignKey("customer.id"))
+    customer_id = Column(Integer, ForeignKey("customer.id"))
 
 
 class Customer(Base):
@@ -56,6 +56,7 @@ class Customer(Base):
     surname = Column(String(224), nullable=True, unique=False)
     phone_number = Column(Integer, nullable=True, unique=True)
     email = Column(String(224), nullable=False, unique=True)
+
 
 class ExpenseItem(Base):
     """Stores expense items that will later be referred to in assigned_expense_items."""
@@ -78,10 +79,11 @@ class AssignedExpenseItem(Base):
     state = Column(String(224))
     created_at = Column(DateTime, default=datetime.now())
 
+
 class SaleToPurchase(Base):
     """Stores ids_purchases for each sale_id"""
     __tablename__ = "sale_to_purchase"
-    
+
     id = Column(Integer, primary_key=True)
     sale_id = Column(Integer, ForeignKey("sale.id"))
     purchase_id = Column(Integer, ForeignKey("purchase.id"))

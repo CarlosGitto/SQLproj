@@ -5,6 +5,7 @@ import datetime
 from typing import Dict, List, Union
 from id_selector import product_id_in_purchase
 
+
 def random_expense_family_engine(num_families: int) -> List[Dict]:
     """Creates list of json objects to seed expense_family table for testing purposes."""
 
@@ -18,8 +19,9 @@ def random_expense_family_engine(num_families: int) -> List[Dict]:
 
     return my_list
 
+
 def random_purchase_engine(num_purchases: int, product: List) -> List[Dict]:
-    
+
     my_list = []
     product_num = len(product)
 
@@ -34,14 +36,14 @@ def random_purchase_engine(num_purchases: int, product: List) -> List[Dict]:
 
         return my_price_list
 
-    product_price = get_product_price(product = product)
+    product_price = get_product_price(product=product)
 
     for i in range(num_purchases):
         product_id = random.randint(1, product_num)
-        cost = random.randint(1,random.choice(product_price))
-        quantity = random.randint(1,300)
-        in_stock = random.randint(0,quantity)
-        
+        cost = random.randint(1, random.choice(product_price))
+        quantity = random.randint(1, 300)
+        in_stock = quantity
+
         created_at = datetime.datetime(
             random.randint(2010, 2021),
             random.randint(1, 12),
@@ -61,6 +63,7 @@ def random_purchase_engine(num_purchases: int, product: List) -> List[Dict]:
         }
         my_list.append(random_row)
     return my_list
+
 
 def random_expense_item_engine(num_expenses: int, families: List) -> List[Dict]:
     """Creates list of json objects to seed expense_item table for testing purposes."""
@@ -122,7 +125,7 @@ def random_product_engine(num_products: int) -> List[Dict]:
     for i in range(num_products):
 
         price = random.randint(0, 100000)
-        
+
         random_row = {
             "price": price,
         }
@@ -148,19 +151,20 @@ def random_sale_engine(num_sales: int, product: List, customer: List) -> List[Di
             random.randint(1, 59)
         )
         quantity = random.randint(1, 500)
-        customer_table_id = random.randint(1, num_customer)
-        
+        customer_id = random.randint(1, num_customer)
+
         random_row = {
             "product_id": product_id,
             "created_at": created_at,
             "quantity": quantity,
-            "customer_table_id": customer_table_id
+            "customer_id": customer_id
         }
 
         my_list.append(random_row)
     return my_list
 
-def random_customer_table_engine(num_customer: int) -> List[Dict]:
+
+def random_customer_engine(num_customer: int) -> List[Dict]:
 
     my_list = []
 
@@ -168,9 +172,9 @@ def random_customer_table_engine(num_customer: int) -> List[Dict]:
         name = "".join(random.choices(string.ascii_letters, k=10))
         surname = "".join(random.choices(string.ascii_letters, k=10))
         phone_number = int(''.join(
-                    random.choices(
-                        ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'], k=9)
-                ))
+            random.choices(
+                ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'], k=9)
+        ))
         email = "".join(random.choices(string.ascii_letters, k=10))
 
         random_row = {
@@ -184,28 +188,29 @@ def random_customer_table_engine(num_customer: int) -> List[Dict]:
 
     return my_list
 
-def random_sale_to_purchase_engine(sale: List[Dict]) -> List[Dict]:
-    print(sale)
-    my_list = []
 
-    for i in range(1):
-        sale_id = i
-        quantity = sale[i]["quantity"]
-        product_id = sale[i]["product_id"]
-        print(quantity, product_id)# -> 474 1
+# def random_sale_to_purchase_engine(sale: List[Dict]) -> List[Dict]:
+#     print(sale)
+#     my_list = []
 
-        purchase_list = product_id_in_purchase(sale_quantity=quantity, product_id=product_id)
-        
-        print(purchase_list)# -> []
+#     for i in range(1):
+#         sale_id = i
+#         quantity = sale[i]["quantity"]
+#         product_id = sale[i]["product_id"]
+#         print(quantity, product_id)  # -> 474 1
 
-        for purchase_dict in purchase_list:
+#         purchase_list = product_id_in_purchase(
+#             sale_quantity=quantity, product_id=product_id)
 
-            random_row = {
-                "sale_id": sale_id,
-                "purchase_id": purchase_dict["purchase_id"],
-                "quantity": purchase_dict["quantity"]
-            }
+#         print(purchase_list)  # -> []
 
-            my_list.append(random_row)
-    print(my_list) 
-     
+#         for purchase_dict in purchase_list:
+
+#             random_row = {
+#                 "sale_id": sale_id,
+#                 "purchase_id": purchase_dict["purchase_id"],
+#                 "quantity": purchase_dict["quantity"]
+#             }
+
+#             my_list.append(random_row)
+#     print(my_list)
