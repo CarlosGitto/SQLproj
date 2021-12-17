@@ -4,7 +4,6 @@ from models import Sale, SaleToPurchase, Purchase
 
 from utils import session
 import sys
-#args = [10, '2021-06-09 10:32:46', 25, 6]
 
 arguments = sys.argv
 
@@ -14,23 +13,26 @@ def batch_iterator(quantity: int, batches: list[tuple[int]]) -> None:
     batches = [list(i) for i in batches]
 
     used_stock = []
+    modified_purchases = []
 
-    for row in batches:
+    for id, stock in batches:
 
-        original_stock = row[-1]
-        row[-1] -= quantity
+        original_stock = stock
+        stock -= quantity
 
-        if row[-1] < 0:
+        if stock < 0:
 
             quantity -= original_stock
-            row[-1] = 0
-            used_stock.append((row[0], original_stock))
+            stock = 0
+            used_stock.append((id, original_stock))
+            modified_purchases.append((id, 0))
 
         else:
-            used_stock.append((row[0], quantity))
+            used_stock.append((id, quantity))
+            modified_purchases.append((id, stock - quantity))
             break
 
-    return [tuple(i) for i in batches], used_stock
+    return modified_purchases, used_stock
 
 
 def sale_creator(arguments: list[int, str]) -> None:
@@ -49,16 +51,13 @@ def sale_creator(arguments: list[int, str]) -> None:
         quantity=quantity, batches=batches)
 
     """Gets batches necessary to fulfill the quantity required by the sale and modifies stock in those rows."""
-    for i in range(len(batches)):
-        if batches[i] != new_batches[i]:
+    for i in range(len(new_batches)):
 
-            session.query(Purchase).filter(
-                Purchase.id == new_batches[i][0]
-            ).update({"in_stock": f"{new_batches[i][1]}"})
+        session.query(Purchase).filter(
+            Purchase.id == new_batches[i][0]
+        ).update({"in_stock": f"{new_batches[i][1]}"})
 
-            session.commit()
-        else:
-            break
+        session.commit()
 
     """Creates and commits the sale table row."""
     new_sale = Sale(product_id=product_id, created_at=created_at,
@@ -79,7 +78,7 @@ def sale_creator(arguments: list[int, str]) -> None:
         session.commit()
 
     print('New sale added successfully.')
-    print('Corresponding tables where modified as expected.')
+    print('Corresponding tables where modified as expected.\n')
 
 
 if __name__ == '__main__':

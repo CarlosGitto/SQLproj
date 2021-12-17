@@ -1,6 +1,4 @@
-"""Remove all tables and views."""
-
-from utils import engine, Base
+from utils import engine
 
 list_of_views = [
     "income_by_month",
@@ -20,5 +18,4 @@ def drop_all_views():
 
 
 if __name__ == "__main__":
-    Base.metadata.drop_all(engine)
     drop_all_views()

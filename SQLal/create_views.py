@@ -1,5 +1,6 @@
 """This file create views in the database using statements in '.sql' files"""
 from utils import engine
+import models
 
 income_statement_by_month = "SQL_views/income_statement_by_month.sql"
 income_statement_by_year = "SQL_views/income_statement_by_year.sql"

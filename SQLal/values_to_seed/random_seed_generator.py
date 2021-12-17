@@ -4,7 +4,6 @@ import string
 import datetime
 from typing import Dict, List, Union
 from create_sale import sale_creator
-from id_selector import product_id_in_purchase
 
 
 def random_expense_family_engine(num_families: int) -> List[Dict]:
@@ -42,7 +41,7 @@ def random_purchase_engine(num_purchases: int, product: List) -> List[Dict]:
     for i in range(num_purchases):
         product_id = random.randint(1, product_num)
         cost = random.randint(1, random.choice(product_price))
-        quantity = random.randint(1, 300)
+        quantity = random.randint(9999000, 99999999)
         in_stock = quantity
 
         created_at = datetime.datetime(
@@ -189,11 +188,11 @@ def random_customer_engine(num_customer: int) -> List[Dict]:
 
     return my_list
 
-def random_sale_creator_engine(sale_num: int,product: int, customer: int) -> None:
-    
-    
+
+def random_sale_creator_engine(sale_num: int, product: int, customer: int) -> None:
+
     for i in range(sale_num):
-        
+
         sale_quantity = random.randint(1, 500)
         product_id = random.randint(1, product)
         customer_id = random.randint(1, customer)
@@ -206,11 +205,7 @@ def random_sale_creator_engine(sale_num: int,product: int, customer: int) -> Non
             random.randint(1, 59)
         )
         sale_date = str(sale_date)
-        
-        my_list = ["",product_id, sale_date, sale_quantity, customer_id]
-        
+
+        my_list = ["", product_id, sale_date, sale_quantity, customer_id]
 
         sale_creator(my_list)
-
-
-
