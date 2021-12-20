@@ -19,7 +19,8 @@ If this is the first time using the application, the following command creates t
 
 
 ```
-python make_tables.py
+python make_all_tables.py
+python make_all_views.py
 ```
 
 For testing purposes, you can populate the database with randomly created data. Open the CLI of your choice and run:

@@ -13,18 +13,18 @@ exit_methods = open(
 def create_views() -> None:
     """Create all views"""
     try:
-        # create_all_views_month.remove("")
-        # create_all_views_year.remove("")
+        create_all_views_month.remove("")
+        create_all_views_year.remove("")
         exit_methods.remove('')
     except:
         pass
-    # for line in create_all_views_month:
-    #     line = line.strip("\n")
-    #     my_cursor.execute(line)
+    for line in create_all_views_month:
+        line = line.strip("\n")
+        my_cursor.execute(line)
 
-    # for line in create_all_views_year:
-    #     line = line.strip("\n")
-    #     my_cursor.execute(line)
+    for line in create_all_views_year:
+        line = line.strip("\n")
+        my_cursor.execute(line)
 
     for line in exit_methods:
         line = line.strip("\n")

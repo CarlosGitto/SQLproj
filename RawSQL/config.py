@@ -4,7 +4,7 @@ import mysql.connector
 
 host = "localhost"
 user = "root"
-password = "root2021"
+password = "123456"
 db_name = "sql_challenge"
 
 
