@@ -1,4 +1,4 @@
-"""Select queries by table."""
+"""Select and display queries by table."""
 
 import sys
 from config import my_cursor
