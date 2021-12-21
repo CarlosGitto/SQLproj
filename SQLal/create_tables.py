@@ -1,8 +1,8 @@
 """File that create tables in the database"""
-from utils import engine, Base
-import models
+from functions.create_tables import table_creator
 
 """Create all tables"""
 
 if __name__ == '__main__':
-    Base.metadata.create_all(engine)
+    table_creator()
+    print('Tables created in database.\n')

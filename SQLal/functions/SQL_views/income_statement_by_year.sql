@@ -45,8 +45,8 @@ SELECT year_income AS 'year',
     other_expenses,
     total_expenses,
     (gross_profit - total_expenses) AS 'profits'
-    FROM income_by_month AS i
-    JOIN expenses_by_month AS e 
+    FROM income_by_year AS i
+    JOIN expenses_by_year AS e 
     ON i.year_income = e.year_expense
     GROUP BY 1
     ORDER BY 1;

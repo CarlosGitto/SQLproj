@@ -1,8 +1,7 @@
 """Remove all tables and views."""
-
-from utils import engine, Base
-import models
+from functions.drop_tables import table_dropper
 
 
 if __name__ == "__main__":
-    Base.metadata.drop_all(engine)
+    table_dropper()
+    print('Tables dropped from database.\n')
