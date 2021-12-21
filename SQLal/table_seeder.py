@@ -1,13 +1,11 @@
-"""Seed the tables with random values"""
+"""This file seed the tables with random values"""
+
 
 from utils import session
 
 import models
 
-from values_to_seed.random_seed_generator import random_assigned_expense_item_engine, random_expense_family_engine, random_expense_item_engine, random_product_engine, random_sale_engine
-
-
-
+from functions.random_seed_generator import random_sale_creator_engine, random_customer_engine, random_purchase_engine, random_assigned_expense_item_engine, random_expense_item_engine, random_product_engine
 
 
 """Seeds database with random values used for testing purposes."""
@@ -29,9 +27,13 @@ families = [
 
 expense_items = random_expense_item_engine(50, families=families)
 products = random_product_engine(10)
-sales = random_sale_engine(1000, product=products)
+purchases = random_purchase_engine(1000, product=products)
+customers = random_customer_engine(300)
+# sales = random_sale_engine(10, product=products, customer=customers)
+# random_sale_to_purchase_engine(sale=sales)
 assigned_expenses = random_assigned_expense_item_engine(
-    200, items=expense_items, sales=sales)
+    200, items=expense_items)
+
 
 expense_item_seed = [
     {"class": models.ExpenseItem, "values": expense_items}]
@@ -48,7 +50,15 @@ assigned_expense_seed = [
 product_seed = [{"class": models.Product, "values": products}]
 
 
-sale_seed = [{"class": models.Sale, "values": sales}]
+# sale_seed = [{"class": models.Sale, "values": sales}]
+
+
+purchase_seed = [{"class": models.Purchase, "values": purchases}]
+
+
+customer_seed = [{"class": models.Customer, "values": customers}]
+
+#sale_to_purchase_seed = [{"class": models.SaleToPurchase, "values": sales_to_purchases}]
 
 
 def seeder(dict_seed):
@@ -66,7 +76,10 @@ def seeder(dict_seed):
 """A list with the right order to seed the tables"""
 list_of_seed = [
     product_seed,
-    sale_seed,
+    customer_seed,
+    purchase_seed,
+    # sale_seed,
+    # sale_to_purchase_seed,
     expense_family_seed,
     expense_item_seed,
     assigned_expense_seed
@@ -75,3 +88,7 @@ list_of_seed = [
 if __name__ == "__main__":
     for seed in list_of_seed:
         seeder(seed)
+    random_sale_creator_engine(sale_num=30, product=len(
+        products), customer=len(customers))
+
+    print('Tables seeded successfully.\n')

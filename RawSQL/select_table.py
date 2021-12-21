@@ -10,7 +10,8 @@ possible_arguments = [
     ['2', 'sale'],
     ['3', 'expense_family'],
     ['4', 'expense_item'],
-    ['5', 'assigned_expense_item']
+    ['5', 'assigned_expense_item'],
+    ['6', 'customer']
 ]
 
 if __name__ == "__main__":

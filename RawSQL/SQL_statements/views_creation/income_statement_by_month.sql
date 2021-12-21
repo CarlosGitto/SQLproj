@@ -1,14 +1,20 @@
 #
 CREATE OR REPLACE VIEW income_by_month AS
-SELECT year(created_at) AS 'year_income', 
-    month(created_at) AS 'month_income', 
-    SUM(price) AS 'sales', 
-    SUM(cost) AS 'cost_of_goods_sold', 
-    (SUM(price) - SUM(cost)) AS 'gross_profit'
-    FROM sale
-    JOIN product ON sale.product_id = product.id
-    GROUP BY 1, 2
-    ORDER BY 1, 2;
+SELECT year(s.created_at) AS 'year_income', 
+	month(s.created_at) AS 'month_income',
+    SUM((stp.quantity * prd.price)) AS 'sales',
+    SUM((stp.quantity * pur.cost)) AS 'cost_of_goods_sold',
+    (
+    SUM((stp.quantity * prd.price)) - SUM((stp.quantity * pur.cost))
+    ) AS 'gross_profit'
+    FROM sale_to_purchase AS stp
+    JOIN purchase AS pur
+    ON stp.purchase_id = pur.id
+    JOIN sale AS s
+    ON s.id = stp.sale_id
+    JOIN product AS prd
+    ON s.product_id = prd.id
+    GROUP BY 1, 2;
 #
 CREATE OR REPLACE VIEW expenses_by_month AS
 SELECT month(created_at) AS 'month_expense', year(created_at) AS 'year_expense', 
