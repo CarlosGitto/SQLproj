@@ -6,7 +6,7 @@ from typing import Dict, List, Union
 from create_sale import sale_creator
 
 
-def random_expense_family_engine(num_families: int) -> List[Dict]:
+def random_expense_family_engine(num_families: int) -> list[dict]:
     """Creates list of json objects to seed expense_family table for testing purposes."""
 
     my_families = []
@@ -20,7 +20,8 @@ def random_expense_family_engine(num_families: int) -> List[Dict]:
     return my_list
 
 
-def random_purchase_engine(num_purchases: int, product: List) -> List[Dict]:
+def random_purchase_engine(num_purchases: int, product: list) -> list[dict]:
+    """Creates random purchase."""
 
     my_list = []
     product_num = len(product)
@@ -65,7 +66,7 @@ def random_purchase_engine(num_purchases: int, product: List) -> List[Dict]:
     return my_list
 
 
-def random_expense_item_engine(num_expenses: int, families: List) -> List[Dict]:
+def random_expense_item_engine(num_expenses: int, families: list) -> list[dict]:
     """Creates list of json objects to seed expense_item table for testing purposes."""
 
     my_list = []
@@ -87,7 +88,7 @@ def random_expense_item_engine(num_expenses: int, families: List) -> List[Dict]:
     return my_list
 
 
-def random_assigned_expense_item_engine(num_assigned_expenses: int, items: List) -> List[Dict]:
+def random_assigned_expense_item_engine(num_assigned_expenses: int, items: list) -> list[dict]:
     """Creates list of json objects to seed assigned_expense_item table for testing purposes."""
 
     my_list = []
@@ -117,7 +118,7 @@ def random_assigned_expense_item_engine(num_assigned_expenses: int, items: List)
     return my_list
 
 
-def random_product_engine(num_products: int) -> List[Dict]:
+def random_product_engine(num_products: int) -> list[dict]:
     """Creates list of json objects to seed product table for testing purposes."""
 
     my_list = []
@@ -133,7 +134,7 @@ def random_product_engine(num_products: int) -> List[Dict]:
     return my_list
 
 
-def random_sale_engine(num_sales: int, product: List, customer: List) -> List[Dict]:
+def random_sale_engine(num_sales: int, product: list, customer: list) -> list[dict]:
     """Creates list of json objects to seed sale table for testing purposes."""
 
     my_list = []
@@ -164,7 +165,7 @@ def random_sale_engine(num_sales: int, product: List, customer: List) -> List[Di
     return my_list
 
 
-def random_customer_engine(num_customer: int) -> List[Dict]:
+def random_customer_engine(num_customer: int) -> list[dict]:
 
     my_list = []
 
