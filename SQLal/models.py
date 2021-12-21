@@ -1,4 +1,4 @@
-"""Set the models for the tables with SQLAlchemy"""
+"""Create tables through models with SQLAlchemy."""
 from sqlalchemy import Column, Integer, String, DateTime, Float
 from datetime import datetime
 
