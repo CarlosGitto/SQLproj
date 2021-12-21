@@ -1,8 +1,14 @@
 DELIMITER //
-CREATE PROCEDURE spSaleWorker(IN product_id INT, INOUT stock_to_buy INT, IN customer_id INT, IN purchase_id INT)
+CREATE PROCEDURE spSaleWorker(IN product_id INT, INOUT stock_to_buy INT, IN customer_id INT)
 BEGIN
-	call spNewSale(product_id, stock_to_buy, customer_id, @sale_id);
-    call spAlterStock(purchase_id, product_id, stock_to_buy, @stock_bough);
-	call spSaleToPur(@sale_id, purchase_id, @stock_bough);
+	
+        
+		call spNewSale(product_id, stock_to_buy, customer_id, @sale_id);
+		
+		call spAlterStock(product_id, stock_to_buy, @sale_id);
+		
+    
+    
 END //
+
 DELIMITER ;
