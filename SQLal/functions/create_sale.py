@@ -41,6 +41,8 @@ def batch_iterator(quantity: int, batches: list[tuple[int]]) -> None:
             stock = 0
             used_stock.append((id, original_stock))
             modified_purchases.append((id, 0))
+            if quantity == 0:
+                break
 
         if stock > quantity:
             used_stock.append((id, quantity))
