@@ -2,8 +2,8 @@
 from utils import engine
 import models
 
-income_statement_by_month = "functions/SQL_views/income_statement_by_month.sql"
-income_statement_by_year = "functions/SQL_views/income_statement_by_year.sql"
+income_statement_by_month = "SQL_views/income_statement_by_month.sql"
+income_statement_by_year = "SQL_views/income_statement_by_year.sql"
 # revenue_evolution = "SQL_views/revenue_growth.sql"
 
 views_list = [income_statement_by_month,

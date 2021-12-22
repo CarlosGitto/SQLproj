@@ -42,7 +42,7 @@ def random_purchase_engine(num_purchases: int, product: list) -> list[dict]:
     for i in range(num_purchases):
         product_id = random.randint(1, product_num)
         cost = random.randint(1, random.choice(product_price))
-        quantity = random.randint(9999000, 99999999)
+        quantity = random.randint(1, 900)
         in_stock = quantity
 
         created_at = datetime.datetime(
@@ -134,35 +134,35 @@ def random_product_engine(num_products: int) -> list[dict]:
     return my_list
 
 
-def random_sale_engine(num_sales: int, product: list, customer: list) -> list[dict]:
-    """Creates list of json objects to seed sale table for testing purposes."""
+# def random_sale_engine(num_sales: int, product: list, customer: list) -> list[dict]:
+#     """Creates list of json objects to seed sale table for testing purposes."""
 
-    my_list = []
-    num_product = len(product)
-    num_customer = len(customer)
+#     my_list = []
+#     num_product = len(product)
+#     num_customer = len(customer)
 
-    for i in range(num_sales):
-        product_id = random.randint(1, num_product)
-        created_at = datetime.datetime(
-            random.randint(2010, 2021),
-            random.randint(1, 12),
-            random.randint(1, 28),
-            random.randint(1, 23),
-            random.randint(1, 59),
-            random.randint(1, 59)
-        )
-        quantity = random.randint(1, 500)
-        customer_id = random.randint(1, num_customer)
+#     for i in range(num_sales):
+#         product_id = random.randint(1, num_product)
+#         created_at = datetime.datetime(
+#             random.randint(2010, 2021),
+#             random.randint(1, 12),
+#             random.randint(1, 28),
+#             random.randint(1, 23),
+#             random.randint(1, 59),
+#             random.randint(1, 59)
+#         )
+#         quantity = random.randint(1, 500)
+#         customer_id = random.randint(1, num_customer)
 
-        random_row = {
-            "product_id": product_id,
-            "created_at": created_at,
-            "quantity": quantity,
-            "customer_id": customer_id
-        }
+#         random_row = {
+#             "product_id": product_id,
+#             "created_at": created_at,
+#             "quantity": quantity,
+#             "customer_id": customer_id
+#         }
 
-        my_list.append(random_row)
-    return my_list
+#         my_list.append(random_row)
+#     return my_list
 
 
 def random_customer_engine(num_customer: int) -> list[dict]:
@@ -194,19 +194,19 @@ def random_sale_creator_engine(sale_num: int, product: int, customer: int) -> No
 
     for i in range(sale_num):
 
-        sale_quantity = random.randint(1, 500)
+        sale_quantity = random.randint(1000, 15000)
         product_id = random.randint(1, product)
         customer_id = random.randint(1, customer)
-        sale_date = datetime.datetime(
-            random.randint(2010, 2021),
-            random.randint(1, 12),
-            random.randint(1, 28),
-            random.randint(1, 23),
-            random.randint(1, 59),
-            random.randint(1, 59)
-        )
-        sale_date = str(sale_date)
+        # sale_date = datetime.datetime(
+        #     random.randint(2010, 2021),
+        #     random.randint(1, 12),
+        #     random.randint(1, 28),
+        #     random.randint(1, 23),
+        #     random.randint(1, 59),
+        #     random.randint(1, 59)
+        # )
+        # sale_date = str(sale_date)
 
-        my_list = ["", product_id, sale_date, sale_quantity, customer_id]
+        my_list = ["", product_id, sale_quantity, customer_id]
 
         sale_creator(my_list)
