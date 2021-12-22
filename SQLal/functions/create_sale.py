@@ -70,7 +70,8 @@ def sale_creator(arguments: list[int, str]) -> None:
             quantity=quantity_to_buy, batches=batches)
         transaction_state = 1
     except TypeError:
-        print(f"Transaction {product_id, quantity_to_buy, customer_id, created_at} failed")
+        print(f"Transaction failed \n>> product_id({product_id}), quantity({quantity_to_buy}), customer_id({customer_id}), date({created_at})")
+        print("\n")
         transaction_state = 0
     
     if transaction_state == 1:

@@ -2,11 +2,11 @@
 
 from config import my_cursor, my_conn
 
-sp_alter_stock = open("SQL_statements/sql_procedure/spAlterStock.sql", "r").read().split("#")
-sp_new_sale = open("SQL_statements/sql_procedure/spNewSale.sql", "r").read().split("#")
-sp_sale_to_purchase = open("SQL_statements/sql_procedure/spSaleToPur.sql", "r").read().split("#")
-sp_sale_worker = open("SQL_statements/sql_procedure/spSaleWorker.sql", "r").read().split("#")
-sp_purchase_id = open("SQL_statements/sql_procedure/spPurchaseID.sql", "r").read().split("#")
+sp_alter_stock = open("SQL_statements/create_and_drop_queries/sql_procedure_creation/spAlterStock.sql", "r").read().split("#")
+sp_new_sale = open("SQL_statements/create_and_drop_queries/sql_procedure_creation/spNewSale.sql", "r").read().split("#")
+sp_sale_to_purchase = open("SQL_statements/create_and_drop_queries/sql_procedure_creation/spSaleToPur.sql", "r").read().split("#")
+sp_sale_worker = open("SQL_statements/create_and_drop_queries/sql_procedure_creation/spSaleWorker.sql", "r").read().split("#")
+sp_purchase_id = open("SQL_statements/create_and_drop_queries/sql_procedure_creation/spPurchaseID.sql", "r").read().split("#")
 
 list_of_procedures = [
     sp_alter_stock,

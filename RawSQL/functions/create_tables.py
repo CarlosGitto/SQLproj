@@ -2,7 +2,7 @@
 from config import my_cursor
 
 create_table_queries = open(
-    "SQL_statements/create_and_drop_queries/create_all.sql", "r").read().split(";")
+    "SQL_statements/create_and_drop_queries/table_creation/create_all.sql", "r").read().split(";")
 
 
 def create_tables(queries: list) -> None:

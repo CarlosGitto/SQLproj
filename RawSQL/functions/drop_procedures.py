@@ -2,7 +2,7 @@
 
 from config import my_cursor, my_conn
 
-drop_procedure_file = open("SQL_statements/sql_procedure/drop_procedures.sql", "r").read().split("#")
+drop_procedure_file = open("SQL_statements/create_and_drop_queries/drop_procedures.sql", "r").read().split("#")
 
 def drop_procedures() -> None:
     """Drop all procedures"""
