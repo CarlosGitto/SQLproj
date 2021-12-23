@@ -19,6 +19,6 @@ def delete_id(arguments: list) -> None:
     for name, model in tables:
 
         if name == table_name:
-            row = model.query.filter_by(id=id)
+            row = session.query(model).filter(model.id == id)
             session.delete(row)
             session.commit()
