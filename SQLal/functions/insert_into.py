@@ -20,12 +20,12 @@ def insert_into(arguments: list) -> None:
 
             new_row = Product(price=price)
 
-        if table_name == 'expense_family':
+        elif table_name == 'expense_family':
             service_name = values[0]
 
             new_row = ExpenseFamily(service_name=service_name)
 
-        if table_name == 'expense_item':
+        elif table_name == 'expense_item':
             item_name = values[0]
             family_id = int(values[1])
             cost = int(values[2])
@@ -33,7 +33,7 @@ def insert_into(arguments: list) -> None:
             new_row = ExpenseItem(item_name=item_name,
                                   family_id=family_id, cost=cost)
 
-        if table_name == 'assigned_expense_item':
+        elif table_name == 'assigned_expense_item':
             item_id = int(values[0])
             state = values[1]
             created_at = values[2]
@@ -41,7 +41,7 @@ def insert_into(arguments: list) -> None:
             new_row = AssignedExpenseItem(
                 item_id=item_id, state=state, created_at=created_at)
 
-        if table_name == 'purchase':
+        elif table_name == 'purchase':
             product_id = values[0]
             quantity = values[1]
             cost = values[2]
@@ -51,7 +51,7 @@ def insert_into(arguments: list) -> None:
             new_row = Purchase(product_id=product_id, quantity=quantity,
                                cost=cost, in_stock=in_stock, created_at=created_at)
 
-        if table_name == 'customer':
+        elif table_name == 'customer':
             name = values[0]
             surname = values[1]
             phone_number = values[2]
@@ -61,5 +61,5 @@ def insert_into(arguments: list) -> None:
                                phone_number=phone_number, email=email)
 
         session.add(new_row)
-        session.commit
+        session.commit()
         print('New row added succesfully.\n')

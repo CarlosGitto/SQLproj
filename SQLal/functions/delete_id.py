@@ -1,5 +1,6 @@
 from utils import session
 from models import Purchase, Customer, AssignedExpenseItem, ExpenseItem, ExpenseFamily, Product
+from sqlalchemy import delete
 
 
 def delete_id(arguments: list) -> None:
@@ -19,6 +20,6 @@ def delete_id(arguments: list) -> None:
     for name, model in tables:
 
         if name == table_name:
-            row = session.query(model).filter(model.id == id)
+            row = session.query(model).get(id)
             session.delete(row)
             session.commit()
