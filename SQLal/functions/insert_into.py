@@ -62,4 +62,4 @@ def insert_into(arguments: list) -> None:
 
         session.add(new_row)
         session.commit()
-        print('New row added succesfully.\n')
+        print('New row added successfully.\n')
