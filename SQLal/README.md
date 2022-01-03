@@ -73,8 +73,7 @@ python select_view.py [arg1] [arg2]**
 
     all     >>  all views
 
-### Optional Step
-## Sales creation
+### Sales creation
 
 ```
 python create_sale.py [args]**
@@ -89,6 +88,23 @@ python create_sale.py [args]**
 
 This script also modifies all tables related to sales.
 
+### Insert values into tables
+
+```
+python insert_into.py [args]**
+```
+
+    ** Args consist of values for columns in the desired table and the table itself.
+
+    [arg1] >> name of the table
+    [arg2] >> values to insert in the table, as a single string separated by commas
+
+    example, how to insert a new client of name Juan, surname Peña, no email and no cellphone
+
+```
+python insert_into.py customer Juan,Peña,,
+```
+
 ## Restart
 
 ```
@@ -98,4 +114,3 @@ python drop_all_tables.py
 ```
 
 ### Go to Step 1
-
